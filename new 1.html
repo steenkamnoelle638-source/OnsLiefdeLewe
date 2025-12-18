@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vir my Gogga</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------------- Global ---------------- */
+    :root{
+      --pink-1: #ffd6f0;
+      --pink-2: #ffe4f2;
+      --accent: #c70062;
+      --text: #5a0037;
+      --soft-shadow: 0 0 14px rgba(255,140,180,0.18);
+    }
+	
+	.page { max-width: 1180px; margin: 0 auto; padding: 18px; box-sizing: border-box; }
+
+    /* ... (jou oorspronklike style bly presies dieselfde tot by die tydlyn) ... */
+
+    /* =================== TYDLYN (nuut) =================== */
+    .timeline {
+      margin: 50px auto;
+      max-width: 900px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: linear-gradient(to bottom, #ff99c8, #c70062);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+      border-radius: 2px;
+    }
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+    .timeline-item::after {
+      content: '💗';
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      line-height: 34px;
+      background: white;
+      border: 4px solid #c70062;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+      font-size: 18px;
+    }
+    .timeline-item:nth-child(odd)::after { right: -17px; }
+    .timeline-item:nth-child(even)::after { left: -17px; }
+
+    .timeline-content {
+      padding: 20px 26px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(199,0,98,0.12);
+      position: relative;
+    }
+    .timeline-date {
+      font-family: "Dancing Script", cursive;
+      font-size: 28px;
+      color: var(--accent);
+      margin-bottom: 0 8px 0;
+    }
+    .timeline-text {
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    /* Responsive tydlyn */
+    @media (max-width: 768px) {
+      .timeline::before { left: 18px; }
+      .timeline-item { width: 100%; padding-left: 60px; padding-right: 20px; text-align: left !important; }
+      .timeline-item::after { left: 1px; }
+      .timeline-item:nth-child(even) { left: 0%; }
+    }
+
+    /* Custom heart cursor (SVG data URI) */
+    body {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' transform='rotate(-12)'%3E%3Cpath d='M12 20 C12 20 4 14.5 4 9 C4 6.5 6 5 8 5 C9.5 5 11 6 12 7.5 C13 6 14.5 5 16 5 C18 5 20 6.5 20 9 C20 14.5 12 20 12 20 Z' fill='%23ff5c9d' stroke='%23e30b5d' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E") 12 12, auto;
+
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      background: linear-gradient(var(--pink-1), #fff);
+      font-family: "Playfair Display", serif;
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Center container and reduce side whitespace on large screens */
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+      box-sizing: border-box;
+    }
+
+    /* ---------------- Header ---------------- */
+    .heart-big {
+      text-align: center;
+      font-size: 60px;
+      color: #ff2e7b;
+      animation: beat 1.6s infinite;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+    @keyframes beat {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.14); }
+      60% { transform: scale(1); }
+      100% { transform: scale(1.14); }
+    }
+
+    .title {
+      font-family: "Dancing Script", cursive;
+      font-size: 56px;
+      color: var(--accent);
+      text-align: center;
+      margin: 6px 0;
+      text-shadow: 0 0 14px #ffb0d4;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 20px;
+      margin: 6px 0 18px 0;
+      opacity: .9;
+      font-style: italic;
+    }
+
+    /* ---------------- Audio ---------------- */
+    .audio-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    audio { width: 62%; max-width: 720px; box-shadow: var(--soft-shadow); border-radius: 8px; }
+
+    /* ---------------- Polaroid gallery (option C style) ---------------- */
+    .polaroid-row {
+      display:flex;
+      justify-content:center;
+      gap:22px;
+      flex-wrap:wrap;
+      margin-top:26px;
+      margin-bottom:18px;
+    }
+
+    .polaroid {
+      width: 280px;
+      background: white;
+      border-radius: 8px;
+      padding: 10px 10px 18px 10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transform-origin: center;
+      transition: transform .28s ease, box-shadow .28s ease;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .polaroid img {
+      width: 100%;
+      border-radius: 6px;
+      display:block;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .polaroid figcaption {
+      margin-top:10px;
+      font-size:14px;
+      color:#8a204a;
+      font-family: "Dancing Script", cursive;
+      opacity:0.95;
+    }
+    /* Tilt each polaroid slightly for scrapbook vibe */
+    .polaroid:nth-child(1){ transform: rotate(-7deg); }
+    .polaroid:nth-child(2){ transform: rotate(6deg);  margin-top:8px;}
+    .polaroid:nth-child(3){ transform: rotate(-2deg); margin-top:4px; }
+
+    .polaroid:hover { transform: scale(1.05) rotate(0deg); box-shadow: 0 18px 40px rgba(199,0,98,0.12); }
+
+    /* ---------------- Video Polaroid ---------------- */
+	.video-polaroid {
+	  transform: rotate(3deg);
+	}
+
+	/* Portrait raam vir landscape video */
+	.video-frame {
+	  width: 100%;
+	  aspect-ratio: 3 / 4;      /* portrait verhouding */
+	  overflow: hidden;
+	  border-radius: 6px;
+	  position: relative;
+	  background: #000;
+	}
+
+	/* Video self – crop landscape na portrait */
+	.video-frame video {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;        /* BELANGRIK: crop */
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	}
+
+	
+	/* ---------------- Lyrics box (keep centered, 80% width visual) ---------------- */
+    .lyrics {
+      width: min(800px, 80%);
+      margin: 24px auto;
+      padding: 26px;
+      background: linear-gradient(#ffffff, var(--pink-2));
+      border-radius: 14px;
+      box-shadow:
+        0 0 6px rgba(255,160,200,0.20),
+        0 0 12px rgba(255,130,190,0.30),
+        0 0 20px rgba(255,120,180,0.40);
+      text-align:left;
+      line-height:1.68;
+      font-size:18.5px;
+    }
+
+    .lyrics p { margin-bottom:18px; }
+
+    /* ---------------- Secret note box ---------------- */
+    .secret-wrap { margin: 18px auto; text-align:center; }
+    .secret-box {
+      width: min(760px,84%);
+      margin:0 auto;
+      background:#fff3fb;
+      padding:16px 18px;
+      border-radius:12px;
+      box-shadow: 0 8px 26px rgba(199,0,98,0.07);
+      cursor:pointer;
+      transition: transform .28s ease, box-shadow .28s ease;
+      user-select:none;
+    }
+    .secret-box:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(199,0,98,0.12); }
+    .secret-title { font-family:"Dancing Script",cursive; font-size:20px; color:#c23a70; }
+    .secret-message {
+      display:none;
+      margin-top:12px;
+      font-size:18px;
+      font-family:"Salina",cursive;
+      color:#8a0044;
+    }
+
+    /* ---------------- Floating hearts background (subtle) ---------------- */
+    .hearts-bg { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow:hidden; }
+    .heart-f {
+      position: absolute;
+      font-size: 18px;
+      opacity: 0.7;
+      filter: drop-shadow(0 6px 12px rgba(199,0,98,0.08));
+      transform: translateY(110vh);
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) scale(0.9); opacity:0.6; }
+      30% { opacity:1; }
+      100% { transform: translateY(-20vh) scale(1.2); opacity:0; }
+    }
+	
+	/* =================== COUPLES SECTIONS =================== */
+	.section {
+	  margin: 50px auto;
+	  max-width: 900px;
+	  text-align: center;
+	}
+
+	.section h2 {
+	  font-family: "Dancing Script", cursive;
+	  font-size: 38px;
+	  color: var(--accent);
+	  margin-bottom: 20px;
+	}
+
+	.card-grid {
+	  display: grid;
+	  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	  gap: 20px;
+	}
+
+	/* Generic card */
+	.card {
+	  background: white;
+	  border-radius: 14px;
+	  padding: 18px;
+	  box-shadow: 0 10px 30px rgba(199,0,98,0.12);
+	  text-align: left;
+	}
+
+	/* Bucket list styling */
+	.bucket-item {
+	  font-size: 18px;
+	  line-height: 1.5;
+	}
+
+	.bucket-item span {
+	  font-size: 22px;
+	  margin-right: 6px;
+	}
+	
+	/* Voltooide bucket list items */
+	.bucket-done {
+	  text-decoration: line-through;
+	  opacity: 0.55;
+	}
+
+	.bucket-done span {
+	  opacity: 0.7;
+	}
+
+	/* Gifts */
+	.gift-card img {
+	  width: 100%;
+	  border-radius: 10px;
+	  margin-bottom: 10px;
+	}
+
+	.gift-date {
+	  font-family: "Dancing Script", cursive;
+	  font-size: 22px;
+	  color: var(--accent);
+	  margin-bottom: 6px;
+	}
+
+	.gift-from {
+	  font-style: italic;
+	  opacity: 0.85;
+	  margin-bottom: 8px;
+	}
+
+    /* ---------------- Footer ---------------- */
+    .footer {
+      margin-top:30px;
+      text-align:center;
+      font-size:20px;
+      font-family:"Dancing Script",cursive;
+      color:#9b2352;
+    }
+
+    /* ---------------- Responsive tweaks ---------------- */
+    @media (max-width:840px){
+      .polaroid { width: 42%; }
+      .polaroid:nth-child(1){ transform: rotate(-4deg); }
+      .polaroid:nth-child(2){ transform: rotate(3deg); }
+      .polaroid:nth-child(3){ transform: rotate(-1deg); }
+      audio { width: 90%; }
+    }
+    @media (max-width:520px){
+      .title { font-size:44px; }
+      .polaroid { width: 85%; transform: rotate(0deg); }
+      .polaroid:nth-child(1), .polaroid:nth-child(2), .polaroid:nth-child(3) { transform: rotate(0deg); }
+      .lyrics { font-size:17px; padding:18px; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="hearts-bg" id="heartsBg"></div>
+
+  <div class="page">
+    <div class="heart-big">❤️</div>
+    <div class="title">Vir my eenigste</div>
+    <div class="subtitle">'n Liedjie, memories & briefies — alles op een plek</div>
+	
+	<center>Ek wou my liedjie vir jou maak sodat jy dit kon luister met ek wat dit sing maar kon ongelukkig nie so hieronder is n liedjie wat ek dink ons verhoudig beskryf<br>
+	<br>
+	Ek kon nie op 1 besluit nie so hier is 2 songs😅😂❤︎<br>Jason Mraz & Colbie Caillat - Lucky
+	<br>Ed Sheeran - Perfect
+	</center>
+	
+	<!-- =================== DIE LIEDJIE =================== -->
+    <div class="audio-wrap">
+      <audio controls>
+        <source src="Colbie_Caillat_ft._Jason_Mraz_-_Lucky.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+	
+	<div class="audio-wrap">
+      <audio controls>
+        <source src="Ed_Sheeran_Perfect.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+	<!-- =================== ONS FOTOS =================== -->
+    <h2 style="text-align: center;">📸 Ons Foto's</h2>
+	
+	<center><span style="font-size: 30px;">✧˚ ༘⋆2025✧˚ ༘ ⋆</span></center>
+	
+    <div class="polaroid-row" aria-hidden="false">
+      <figure class="polaroid">
+        <img src="LockScreen_TypePic.jpeg" alt="Lockscreen Photo">
+        <figcaption>Ons eerste foto saam</figcaption>
+      </figure>
+
+      <figure class="polaroid">
+        <img src="Selfie.jpeg" alt="Selfie">
+        <figcaption>Ons eerste selfie</figcaption>
+      </figure>
+
+      <figure class="polaroid">
+        <img src="1SteKuier_IRL.jpeg" alt="Eerste kuier IRL">
+        <figcaption>
+			Mekaar eerste keer IRL ontmoet<br>
+			<center>Ons couples drink ♡
+		</figcaption>
+      </figure>
+	  
+		<figure class="polaroid video-polaroid">
+		  <div class="video-frame">
+			<video autoplay loop muted playsinline>
+			  <source src="Ons1steFireworkShow.mp4" type="video/mp4">
+			</video>
+		  </div>
+		  <figcaption>Ons eerste fireworks 🎆</figcaption>
+		</figure>
+    </div>
+	
+	<!-- <center><span style="font-size: 30px;">✧˚ ༘⋆2026✧˚ ༘ ⋆</span></center>
+	
+	<div class="polaroid-row" aria-hidden="false">
+      <figure class="polaroid">
+        <img src="" alt="">
+        <figcaption>Ons 2026 fotos sal hier kom</figcaption>
+      </figure>
+	</div>
+	-->
+	
+	<!-- =================== TYDLYN =================== -->
+    <h2 style="text-align: center; margin:40px 0 20px;">🕰️ Ons Tydlyn</h2>
+	<div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">23 April 2025</div>
+          <div class="timeline-text"> Die dag toe alles begin het💕</div>
+        </div>
+      </div>
+	  
+	<div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">28 Augustus 2025</div>
+          <div class="timeline-text">Ons heel eerste keer IRL ontmoet en ons “couples drink” gehad het \̅_̅/̷̚ʾ</div>
+        </div>
+      </div>
+	  
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">23 September 2025</div>
+          <div class="timeline-text">Die dag toe ons mekaar ons harte gegee het      (づᴗ ‿ᴗ)づ♡</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">2 November 2025</div>
+          <div class="timeline-text">Ons 1ste official date (⌐⎚‿⎚)</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">3 Desember 2025</div>
+          <div class="timeline-text">Ons 1ste cuddle (っ˶ ˘ ᵕ˘)ˆᵕ ˆ˶ς)</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">6 Desember 2025</div>
+          <div class="timeline-text">Ons eerse firework show saam 🎆</div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+	
+	<!-- =================== MY SECRET MSG =================== -->
+    <div class="secret-wrap">
+      <h2>💌 'n Klein geheime liefdesboodskap </h2>
+
+      <div class="secret-box" id="secretBox" role="button" tabindex="0" aria-pressed="false" aria-label="Klik om geheime boodskap te wys">
+        <div class="secret-title">Klick hier vir 'n secret boodskap my ℳ𝑦 ℒ𖹭𝑣𝑒 ༝༚༝༚💗</div>
+		
+        <div id="secretMessage" class="secret-message">
+          Jy is my veilige plek, <i>my home</i>.<br>
+		  My gunsteling persoon in existance.<br>
+		  Die een wat my geliefd en gelukkig laat voel soos nooit tevore<br>
+		  deur net in my lewe te wees.<br>
+		  <br>
+	      Ek kies jou Keegan<br>
+		  elke sekonde, minuut, uur, dag, week, jaar, dekade...<br>
+		  Ek kies jou elke keer en vir ewig.<br>
+		  ℐ𝓁ℴ𝓋ℯ 𝓎ℴ𝓊 <3
+        </div>
+      </div>
+    </div>
+	
+	<!-- =================== COUPLES BUCKET LIST =================== -->
+	<div class="section">
+	  <h2>👩‍❤️‍💋‍👨 Ons Couples Bucket List</h2>
+
+	  <div class="card-grid">
+		<div class="card bucket-item bucket-done">
+		  <span>📸🖼️</span> Ons eerste foto saam
+		</div>
+		
+		<div class="card bucket-item">
+		  <span>💥</span> ComicCon bywoon
+		</div>
+
+		<div class="card bucket-item">
+		  <span>⛩️🏯</span> Otaku Culture besoek
+		</div>
+
+		<div class="card bucket-item">
+		  <span>🎥🍿</span> Movie saam kyk - net ek en jy
+		</div>
+
+		<div class="card bucket-item">
+		  <span>🖼️</span> ’n Foto-album vol memories
+		</div>
+
+	  </div>
+	</div>
+	
+	<!-- =================== ONS GESKENKE AAN MEKAAR =================== -->
+	<div class="section">
+	  <h2>🎁 Ons Geskenke </h2>
+
+	  <div class="card-grid">
+		<div class="card gift-card">
+		  <img src="Gojo.jpeg" alt="Gojo 3D print">
+		  <div class="gift-date">28 Augustus 2025</div>
+		  <div class="gift-from">Van jou, vir my 💗</div>
+		  <div>
+			Gojo print –  
+			Beide van ons hou van JJK veral Sukuna maar jy kon nie n model van Sukuna kry nie so toe print jy Gojo vir my as geskenk<br>
+			<center><strong>≽ ^⎚ ˕ ⎚^ ≼</strong></center>
+		  </div>
+		</div>
+		
+		<div class="card gift-card">
+		  <img src="RoseMomentos.jpeg" alt="Rose Momentos">
+		  <div class="gift-date">28 Augustus 2025</div>
+		  <div class="gift-from">Van jou, vir ons 💗</div>
+		  <div>
+			First time irl momentos –  
+			Die blou rosies wat jy as momentos gekoop het vir ons omdat hulle my gunsteling kleur is<br>
+			<center><strong>🌹</strong></center>
+		  </div>
+		</div>
+		
+		<div class="card gift-card">
+		  <img src="AchievementTrophy.jpeg" alt="IRL Ontmoet Achievement Trophy">
+		  <div class="gift-date">28 Augustus 2025</div>
+		  <div class="gift-from">Van my, vir jou 💗</div>
+		  <div>
+			Irl achievement trophy –  
+			Achievement unlocked: Besto Friendo<br>
+			Meet each other irl<br>
+			<center><strong>𐀪𐀪</strong></center>
+		  </div>
+		</div>
+		
+		<div class="card gift-card">
+		  <img src="QuackPlush.jpeg" alt="Eendjie plush">
+		  <div class="gift-date">2 November 2025</div>
+		  <div class="gift-from">Van jou, vir my 💗</div>
+		  <div>
+			My eendjie plush –  
+			Om my te help met my eksamens en my te herhinner aan jou as ek slaap<br> 
+			<center><strong>(˶˃ ᵕ ˂˶)</strong></center>
+		  </div>
+		</div>
+		
+		<div class="card gift-card">
+		  <img src="QuackBraclets.jpeg" alt="Quack Bracelets">
+		  <div class="gift-date">23 Desember 2025</div>
+		  <div class="gift-from">Van my, vir ons 💗</div>
+		  <div>
+			Matching initials armbandjies –  
+			Sodat ons altyd ietsiekie het om ons te herhinner van mekaar, asook 'n eendjie vir jou liefie<br> 
+			<center><strong>𝒩 ♡ 𝒦</strong></center>
+		  </div>
+		</div>
+		
+	  </div>
+	</div>
+	
+	<!-- =================== MY LERIEKE =================== -->
+    <h2 style="text-align: center;">♡ Lirieke van my liedjie</h2>
+    <div class="lyrics" role="article" aria-label="Lirieke van die liedjie">
+      <p>I’ll be there for you through your highs and lows,<br>
+      ’Cause baby, nothing is more important to me than you.<br>
+      Just one word from you is enough to light up my day<br>
+      In a way I never knew was possible.</p>
+
+      <p>Thank you, baby, for showing me this new world of love.<br>
+      I keep falling harder every day for you.<br>
+      You helped me realise you were made for me,<br>
+      Trusting to be with you till the end.</p>
+
+      <p>Through lifetimes I’ll follow<br>
+      And be yours again and again.<br>
+      Nobody can keep me away from you —<br>
+      My love for you is simply too strong.</p>
+
+      <p>You are my one and only,<br>
+      My happy-ever-after I thought lived only in fairytales.<br>
+      Nobody will ever replace you in my heart.<br>
+      You’re the light, the warmth, the whole world I never knew I needed<br>
+      Until the day I met you.</p>
+
+      <p>I always keep wishing my duck could switch places with you.<br>
+      Never knew someone could stay on my mind this much<br>
+      Until I met you.</p>
+
+      <p>You stepped into my life and everything changed —<br>
+      A peace I’ve never felt before,<br>
+      A safety I’ve only known in your arms.<br>
+      I’m always thankful for your thoughtfulness<br>
+      And showing me that I’m equal in this.</p>
+
+      <p>Can’t wait for the day we reach DLC 3.</p>
+
+      <p>You gave me a safe space — a home different from home,<br>
+      A place where I can share anything and feel at ease.<br>
+      You protect my heart the best you can,<br>
+      And I’ll do the same with yours.</p>
+
+      <p>You are my one and only,<br>
+      My happy-ever-after I thought lived only in fairytales.<br>
+      You’re everything…<br>
+      My whole world from the moment you stepped in.</p>
+
+      <p>On the 23rd of September we promised<br>
+      To look after each other’s fragile and broken hearts.</p>
+
+      <p>The day you walked into my life<br>
+      Is etched in my memory like yesterday —<br>
+      A click more intense than anything before.</p>
+
+      <p>I thank God every day for putting you on my path.<br>
+      He saw I needed you,<br>
+      And even just your presence<br>
+      Is enough to help me breathe again.</p>
+
+      <p>No words will ever describe<br>
+      How much I truly love you.</p>
+
+      <p>Thank you for letting me into your life,<br>
+      For giving me your love too.</p>
+
+      <p>Your everyday presence is something<br>
+      I never knew I could crave this much.</p>
+
+      <p>And I’ll forever guard our little moments —<br>
+      Our “Ayyy’s”, our good mornings and good nights,<br>
+      Our shared research to help our love grow stronger every day.</p>
+
+      <p>
+        I fall for you more every day…<br>
+        Again and again…<br>
+        My soulmate.<br>
+        My safe place.<br>
+        My forever.
+      </p>
+    </div>
+
+    <div class="footer">
+      Made with lots of love for you, my liefie ♥<br>
+	  <center>ℓo͟v͟ꫀ ყoυ .ᐟ</center>
+    </div>
+  </div>
+
+  <!-- ---------------- Scripts ---------------- -->
+  <script>
+    // Floating hearts: create a few hearts with random positions/sizes/speeds
+    (function createHearts(){
+      const bg = document.getElementById('heartsBg');
+      const colors = ['️‍❤️‍🔥','💕','💖','❤️','💝',];
+      const count = 10;
+      for (let i=0;i<count;i++){
+        const d = document.createElement('div');
+        d.className = 'heart-f';
+        d.innerText = colors[i % colors.length];
+        // random left position
+        d.style.left = (5 + Math.random()*90) + 'vw';
+        // random font size
+        d.style.fontSize = (12 + Math.random()*18) + 'px';
+        // random delay and duration
+        const dur = 6 + Math.random()*6;
+        d.style.animationDuration = dur + 's';
+        d.style.animationDelay = (Math.random()*2) + 's';
+        bg.appendChild(d);
+      }
+    })();
+
+    // secret note toggle + keyboard accessibility (enter/space)
+    const secretBox = document.getElementById('secretBox');
+    const secretMessage = document.getElementById('secretMessage');
+
+    function toggleSecret(){
+      const open = secretMessage.style.display === 'block';
+      secretMessage.style.display = open ? 'none' : 'block';
+      secretBox.setAttribute('aria-pressed', (!open).toString());
+      if (!open) {
+        // gentle focus to message for screen readers
+        secretMessage.setAttribute('tabindex','-1');
+        secretMessage.focus({preventScroll:true});
+      }
+    }
+
+    secretBox.addEventListener('click', toggleSecret);
+    secretBox.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleSecret(); }
+    });
+  </script>
+</body>
+</html>

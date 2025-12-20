@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vir my Gogga</title>
+  <title>Ons Liefde</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ---------------- Global ---------------- */
+/* ==========================================================================
+   ------------- Hierdie is net styling nie die actual teks nie -------------
+   ========================================================================== */
     :root{
       --pink-1: #ffd6f0;
       --pink-2: #ffe4f2;
@@ -20,9 +22,7 @@
 	
 	.page { max-width: 1180px; margin: 0 auto; padding: 18px; box-sizing: border-box; }
 
-    /* ... (jou oorspronklike style bly presies dieselfde tot by die tydlyn) ... */
-
-    /* =================== TYDLYN (nuut) =================== */
+    /* ====================================== TYDLYN ====================================== */
     .timeline {
       margin: 50px auto;
       max-width: 900px;
@@ -94,7 +94,7 @@
       .timeline-item:nth-child(even) { left: 0%; }
     }
 
-    /* Custom heart cursor (SVG data URI) */
+    /* ====================================== HARTJIE MUIS WYSER ====================================== */
     body {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' transform='rotate(-12)'%3E%3Cpath d='M12 20 C12 20 4 14.5 4 9 C4 6.5 6 5 8 5 C9.5 5 11 6 12 7.5 C13 6 14.5 5 16 5 C18 5 20 6.5 20 9 C20 14.5 12 20 12 20 Z' fill='%23ff5c9d' stroke='%23e30b5d' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E") 12 12, auto;
 
@@ -115,7 +115,7 @@
       box-sizing: border-box;
     }
 
-    /* ---------------- Header ---------------- */
+    /* ====================================== Header ====================================== */
     .heart-big {
       text-align: center;
       font-size: 60px;
@@ -148,7 +148,7 @@
       font-style: italic;
     }
 
-    /* ---------------- Audio ---------------- */
+    /* ====================================== AUDIO BLOKIE DING ====================================== */
     .audio-wrap {
       display: flex;
       justify-content: center;
@@ -156,7 +156,7 @@
     }
     audio { width: 62%; max-width: 720px; box-shadow: var(--soft-shadow); border-radius: 8px; }
 
-    /* ---------------- Polaroid gallery (option C style) ---------------- */
+    /* ====================================== POLAROID STYL FOTOS ====================================== */
     .polaroid-row {
       display:flex;
       justify-content:center;
@@ -191,14 +191,14 @@
       font-family: "Dancing Script", cursive;
       opacity:0.95;
     }
-    /* Tilt each polaroid slightly for scrapbook vibe */
+    /* Polaroid biedjie skuins le */
     .polaroid:nth-child(1){ transform: rotate(-7deg); }
     .polaroid:nth-child(2){ transform: rotate(6deg);  margin-top:8px;}
     .polaroid:nth-child(3){ transform: rotate(-2deg); margin-top:4px; }
 
     .polaroid:hover { transform: scale(1.05) rotate(0deg); box-shadow: 0 18px 40px rgba(199,0,98,0.12); }
 
-    /* ---------------- Video Polaroid ---------------- */
+    /* ====================================== POLAROID STYL VIDEO ====================================== */
 	.video-polaroid {
 	  transform: rotate(3deg);
 	}
@@ -224,7 +224,7 @@
 	}
 
 	
-	/* ---------------- Lyrics box (keep centered, 80% width visual) ---------------- */
+	/* ====================================== LERIEKE BOKS ====================================== */
     .lyrics {
       width: min(800px, 80%);
       margin: 24px auto;
@@ -242,7 +242,7 @@
 
     .lyrics p { margin-bottom:18px; }
 
-    /* ---------------- Secret note box ---------------- */
+    /* ====================================== GEHEIME BOODSKAP BOKSIE ====================================== */
     .secret-wrap { margin: 18px auto; text-align:center; }
     .secret-box {
       width: min(760px,84%);
@@ -265,7 +265,7 @@
       color:#8a0044;
     }
 
-    /* ---------------- Floating hearts background (subtle) ---------------- */
+    /* ====================================== FLOATING HARTJIES ====================================== */
     .hearts-bg { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow:hidden; }
     .heart-f {
       position: absolute;
@@ -281,7 +281,7 @@
       100% { transform: translateY(-20vh) scale(1.2); opacity:0; }
     }
 	
-	/* =================== COUPLES SECTIONS =================== */
+	/* ====================================== BUCKET LIST ====================================== */
 	.section {
 	  margin: 50px auto;
 	  max-width: 900px;
@@ -321,7 +321,7 @@
 	  margin-right: 6px;
 	}
 	
-	/* Voltooide bucket list items */
+	/* Voltooide bucket list item (doodtrek + grys maak) */
 	.bucket-done {
 	  text-decoration: line-through;
 	  opacity: 0.55;
@@ -331,7 +331,7 @@
 	  opacity: 0.7;
 	}
 
-	/* Gifts */
+	/* ====================================== GESKENKE FOTO + DETAILS ====================================== */
 	.gift-card img {
 	  width: 100%;
 	  border-radius: 10px;
@@ -351,7 +351,7 @@
 	  margin-bottom: 8px;
 	}
 
-    /* ---------------- Footer ---------------- */
+    /* ====================================== Footer ====================================== */
     .footer {
       margin-top:30px;
       text-align:center;
@@ -360,7 +360,7 @@
       color:#9b2352;
     }
 
-    /* ---------------- Responsive tweaks ---------------- */
+    /* ====================================== Responsive tweaks ====================================== */
     @media (max-width:840px){
       .polaroid { width: 42%; }
       .polaroid:nth-child(1){ transform: rotate(-4deg); }
@@ -378,6 +378,9 @@
   </style>
 </head>
 
+<!-- ==========================================================================
+     ------------------- ACTUAL TEKS EN FOTOS KOM HIERBINNE -------------------
+     ========================================================================== -->
 <body>
   <div class="hearts-bg" id="heartsBg"></div>
 
@@ -392,7 +395,7 @@
 	<br>Ed Sheeran - Perfect
 	</center>
 	
-	<!-- =================== DIE LIEDJIE =================== -->
+	<!-- ====================================== DIE LIEDJIES ====================================== -->
     <div class="audio-wrap">
       <audio controls>
         <source src="Colbie_Caillat_ft._Jason_Mraz_-_Lucky.mp3" type="audio/mpeg">
@@ -405,10 +408,11 @@
       </audio>
     </div>
 
-	<!-- =================== ONS FOTOS =================== -->
+	<!-- ====================================== ONS FOTOS ====================================== -->
     <h2 style="text-align: center;">📸 Ons Foto's</h2>
 	
-	<center><span style="font-size: 30px;">✧˚ ༘⋆2025✧˚ ༘ ⋆</span></center>
+ <!-- ------------------------ 2025 Fotos ------------------------ -->
+	  <center><span style="font-size: 30px;">✧˚ ༘⋆2025✧˚ ༘ ⋆</span></center>
 	
     <div class="polaroid-row" aria-hidden="false">
       <figure class="polaroid">
@@ -438,7 +442,8 @@
 		  <figcaption>Ons eerste fireworks 🎆</figcaption>
 		</figure>
     </div>
-	
+
+<!-- ------------------------ 2026 Fotos ------------------------ -->
 	<!-- <center><span style="font-size: 30px;">✧˚ ༘⋆2026✧˚ ༘ ⋆</span></center>
 	
 	<div class="polaroid-row" aria-hidden="false">
@@ -449,9 +454,10 @@
 	</div>
 	-->
 	
-	<!-- =================== TYDLYN =================== -->
+	<!-- ====================================== TYDLYN ====================================== -->
     <h2 style="text-align: center; margin:40px 0 20px;">🕰️ Ons Tydlyn</h2>
 	<div class="timeline">
+		
       <div class="timeline-item">
         <div class="timeline-content">
           <div class="timeline-date">23 April 2025</div>
@@ -498,7 +504,7 @@
 
     </div>
 	
-	<!-- =================== MY SECRET MSG =================== -->
+	<!-- ====================================== MY GEHEIME BOODSKAP ====================================== -->
     <div class="secret-wrap">
       <h2>💌 'n Klein geheime liefdesboodskap </h2>
 
@@ -519,15 +525,17 @@
       </div>
     </div>
 	
-	<!-- =================== COUPLES BUCKET LIST =================== -->
+	<!-- ====================================== COUPLES BUCKET LIST ====================================== -->
 	<div class="section">
 	  <h2>👩‍❤️‍💋‍👨 Ons Couples Bucket List</h2>
 
-	  <div class="card-grid">
+		<div class="card-grid">
+		<!-- ----------------------- As ons dit reeds gedoen het ----------------------- -->
 		<div class="card bucket-item bucket-done">
 		  <span>📸🖼️</span> Ons eerste foto saam
 		</div>
-		
+
+		<!-- ----------------------- As ons dit nog nie gedoen het nie ----------------------- -->
 		<div class="card bucket-item">
 		  <span>💥</span> ComicCon bywoon
 		</div>
@@ -555,7 +563,7 @@
 	  </div>
 	</div>
 	
-	<!-- =================== ONS GESKENKE AAN MEKAAR =================== -->
+	<!-- ====================================== ONS GESKENKE AAN MEKAAR ====================================== -->
 	<div class="section">
 	  <h2>🎁 Ons Geskenke </h2>
 
@@ -577,7 +585,7 @@
 		  <div class="gift-from">Van jou, vir ons 💗</div>
 		  <div>
 			First time irl momentos –  
-			Die blou rosies wat jy as momentos gekoop het vir ons omdat hulle my gunsteling kleur is<br>
+			Die blou rosies wat jy as momentos gekoop het vir ons ,ook die bloues gekies oor dit my fav kleur is<br>
 			<center><strong>🌹</strong></center>
 		  </div>
 		</div>
@@ -615,80 +623,123 @@
 			<center><strong>𝒩 ♡ 𝒦</strong></center>
 		  </div>
 		</div>
+
+		<div class="card gift-card">
+		  <img src="MovieTickets.jpeg" alt="Ons eerste movie se tickets">
+		  <div class="gift-date">23 Desember 2025</div>
+		  <div class="gift-from">Van my, vir ons 💗</div>
+		  <div>
+			FNAF 2 movie tickets –  
+			Ons eerste movie saam kan kyk op n balangrike daggie<br> 
+			<center><strong>🎟📽</strong></center>
+		  </div>
+		</div>
 		
 	  </div>
 	</div>
 	
-	<!-- =================== MY LERIEKE =================== -->
+	<!-- ====================================== MY LERIEKE ====================================== -->
     <h2 style="text-align: center;">♡ Lirieke van my liedjie</h2>
     <div class="lyrics" role="article" aria-label="Lirieke van die liedjie">
-      <p>I’ll be there for you through your highs and lows,<br>
-      ’Cause baby, nothing is more important to me than you.<br>
-      Just one word from you is enough to light up my day<br>
-      In a way I never knew was possible.</p>
+      <p>
+		I’ll be there for you through your highs and lows,<br>
+        Cause baby, nothing is more important to me than you.<br>
+        Just one word from you is enough to light up my day<br>
+        In a way I never knew was possible.
+	  </p>
 
-      <p>Thank you, baby, for showing me this new world of love.<br>
-      I keep falling harder every day for you.<br>
-      You helped me realise you were made for me,<br>
-      Trusting to be with you till the end.</p>
+      <p>
+		Thank you, baby, for showing me this new world of love.<br>
+        I keep falling harder every day for you.<br>
+        You helped me realise you were made for me,<br>
+        Trusting to be with you till the end.
+	  </p>
 
-      <p>Through lifetimes I’ll follow<br>
-      And be yours again and again.<br>
-      Nobody can keep me away from you —<br>
-      My love for you is simply too strong.</p>
+      <p>
+		Through lifetimes I’ll follow<br>
+        And be yours again and again.<br>
+        Nobody can keep me away from you —<br>
+        My love for you is simply too strong.
+	  </p>
 
-      <p>You are my one and only,<br>
-      My happy-ever-after I thought lived only in fairytales.<br>
-      Nobody will ever replace you in my heart.<br>
-      You’re the light, the warmth, the whole world I never knew I needed<br>
-      Until the day I met you.</p>
+      <p>
+		You are my one and only,<br>
+        My happy-ever-after I thought lived only in fairytales.<br>
+        Nobody will ever replace you in my heart.<br>
+        You’re the light, the warmth, the whole world I never knew I needed<br>
+        Until the day I met you.
+	  </p>
 
-      <p>I always keep wishing my duck could switch places with you.<br>
-      Never knew someone could stay on my mind this much<br>
-      Until I met you.</p>
+      <p>
+		I always keep wishing my duck could switch places with you.<br>
+        Never knew someone could stay on my mind this much<br>
+        Until I met you.
+	  </p>
 
-      <p>You stepped into my life and everything changed —<br>
-      A peace I’ve never felt before,<br>
-      A safety I’ve only known in your arms.<br>
-      I’m always thankful for your thoughtfulness<br>
-      And showing me that I’m equal in this.</p>
+      <p>
+		You stepped into my life and everything changed —<br>
+        A peace I’ve never felt before,<br>
+        A safety I’ve only known in your arms.<br>
+        I’m always thankful for your thoughtfulness<br>
+        And showing me that I’m equal in this.
+	  </p>
 
-      <p>Can’t wait for the day we reach DLC 3.</p>
+      <p>
+		Can’t wait for the day we reach DLC 3.
+	  </p>
 
-      <p>You gave me a safe space — a home different from home,<br>
-      A place where I can share anything and feel at ease.<br>
-      You protect my heart the best you can,<br>
-      And I’ll do the same with yours.</p>
+      <p>
+		You gave me a safe space — a home different from home,<br>
+        A place where I can share anything and feel at ease.<br>
+        You protect my heart the best you can,<br>
+        And I’ll do the same with yours.
+	  </p>
 
-      <p>You are my one and only,<br>
-      My happy-ever-after I thought lived only in fairytales.<br>
-      You’re everything…<br>
-      My whole world from the moment you stepped in.</p>
+      <p>
+		You are my one and only,<br>
+        My happy-ever-after I thought lived only in fairytales.<br>
+        You’re everything…<br>
+        My whole world from the moment you stepped in.
+	  </p>
 
-      <p>On the 23rd of September we promised<br>
-      To look after each other’s fragile and broken hearts.</p>
+      <p>
+		On the 23rd of September we promised<br>
+        To look after each other’s fragile and broken hearts.
+	  </p>
 
-      <p>The day you walked into my life<br>
-      Is etched in my memory like yesterday —<br>
-      A click more intense than anything before.</p>
+      <p>
+		The day you walked into my life<br>
+        Is etched in my memory like yesterday —<br>
+        A click more intense than anything before.
+	  </p>
 
-      <p>I thank God every day for putting you on my path.<br>
-      He saw I needed you,<br>
-      And even just your presence<br>
-      Is enough to help me breathe again.</p>
+      <p>
+		I thank God every day for putting you on my path.<br>
+        He saw I needed you,<br>
+        And even just your presence<br>
+        Is enough to help me breathe again.
+	  </p>
 
-      <p>No words will ever describe<br>
-      How much I truly love you.</p>
+      <p>
+		No words will ever describe<br>
+        How much I truly love you.
+	  </p>
 
-      <p>Thank you for letting me into your life,<br>
-      For giving me your love too.</p>
+      <p>
+		Thank you for letting me into your life,<br>
+        For giving me your love too.
+	  </p>
 
-      <p>Your everyday presence is something<br>
-      I never knew I could crave this much.</p>
+      <p>
+		Your everyday presence is something<br>
+        I never knew I could crave this much.
+	  </p>
 
-      <p>And I’ll forever guard our little moments —<br>
-      Our “Ayyy’s”, our good mornings and good nights,<br>
-      Our shared research to help our love grow stronger every day.</p>
+      <p>
+		And I’ll forever guard our little moments <br>
+        Our “Ayyy’s”, our good mornings and good nights,<br>
+        Our shared research to help our love grow stronger every day.
+	  </p>
 
       <p>
         I fall for you more every day…<br>
@@ -705,7 +756,7 @@
     </div>
   </div>
 
-  <!-- ---------------- Scripts ---------------- -->
+  <!-- ====================================== Scripts ====================================== -->
   <script>
     // Floating hearts: create a few hearts with random positions/sizes/speeds
     (function createHearts(){
@@ -750,6 +801,7 @@
   </script>
 </body>
 </html>
+
 
 
 

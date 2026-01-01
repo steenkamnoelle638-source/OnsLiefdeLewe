@@ -987,19 +987,13 @@ function initBook(bookId){
   }
 
   function next(){
-	  if(index < pages.length - 1){
-	    index++;
-	  } else {
-	    index = 0; // gaan terug na eerste bladsy
-	  }
-	  show(index);
-	}
+    index = (index + 1) % pages.length; // loop vorentoe oneindig
+    show(index);
+  }
 
   function prev(){
-    if(index > 0){
-      index--;
-      show(index);
-    }
+    index = (index - 1 + pages.length) % pages.length; // loop agtertoe oneindig
+    show(index);
   }
 
   /* CLICK */
@@ -1026,9 +1020,9 @@ initBook("bookN");
 initBook("bookK");
 </script>
 
-	  /* test */
 </body>
 </html>
+
 
 
 

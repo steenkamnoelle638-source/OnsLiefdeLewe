@@ -972,89 +972,106 @@
   </div>
 
   <!-- ====================================== Scripts ====================================== -->
-  <script>
-    // Floating hearts: create a few hearts with random positions/sizes/speeds
-    (function createHearts(){
-      const bg = document.getElementById('heartsBg');
-      const colors = ['️‍❤️‍🔥','💕','💖','❤️','💝',];
-      const count = 10;
-      for (let i=0;i<count;i++){
-        const d = document.createElement('div');
-        d.className = 'heart-f';
-        d.innerText = colors[i % colors.length];
-        // random left position
-        d.style.left = (5 + Math.random()*90) + 'vw';
-        // random font size
-        d.style.fontSize = (12 + Math.random()*18) + 'px';
-        // random delay and duration
-        const dur = 6 + Math.random()*6;
-        d.style.animationDuration = dur + 's';
-        d.style.animationDelay = (Math.random()*2) + 's';
-        bg.appendChild(d);
-      }
-    })();
-
-    // secret note toggle + keyboard accessibility (enter/space)
-    const secretBox = document.getElementById('secretBox');
-    const secretMessage = document.getElementById('secretMessage');
-
-    function toggleSecret(){
-      const open = secretMessage.style.display === 'block';
-      secretMessage.style.display = open ? 'none' : 'block';
-      secretBox.setAttribute('aria-pressed', (!open).toString());
-      if (!open) {
-        // gentle focus to message for screen readers
-        secretMessage.setAttribute('tabindex','-1');
-        secretMessage.focus({preventScroll:true});
-      }
-    }
-
-    secretBox.addEventListener('click', toggleSecret);
-    secretBox.addEventListener('keydown', function(e){
-      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleSecret(); }
-    });
-  </script>
-
-  <script>
-  const books = {};
-
-  function initBook(bookId){
-    const pages = document.querySelectorAll(`#${bookId} .page`);
-    books[bookId] = { pages, index: 0 };
-    updateBook(bookId);
-  }
-
-  function updateBook(bookId){
-    const book = books[bookId];
-    book.pages.forEach((p,i)=>{
-      p.classList.remove("active","past");
-      if(i === book.index) p.classList.add("active");
-      else if(i < book.index) p.classList.add("past");
-    });
-    document.getElementById(`indicator-${bookId}`).innerText =
-      `Bladsy ${book.index + 1} van ${book.pages.length}`;
-  }
-
-  function nextPage(bookId){
-    if(books[bookId].index < books[bookId].pages.length - 1){
-      books[bookId].index++;
-      updateBook(bookId);
-    }
-  }
-
-  function prevPage(bookId){
-    if(books[bookId].index > 0){
-      books[bookId].index--;
-      updateBook(bookId);
-    }
-  }
-
-  initBook("bookN");
-  initBook("bookK");
-</script>
+	<script>
+	document.addEventListener("DOMContentLoaded", () => {
 	
-</body>
-</html>
+	  /* ================= FLOATING HEARTS ================= */
+	  (function createHearts(){
+	    const bg = document.getElementById('heartsBg');
+	    if(!bg) return;
+	
+	    const colors = ['❤️‍🔥','💕','💖','❤️','💝'];
+	    const count = 10;
+	
+	    for (let i = 0; i < count; i++) {
+	      const d = document.createElement('div');
+	      d.className = 'heart-f';
+	      d.innerText = colors[i % colors.length];
+	      d.style.left = (5 + Math.random() * 90) + 'vw';
+	      d.style.fontSize = (12 + Math.random() * 18) + 'px';
+	
+	      const dur = 6 + Math.random() * 6;
+	      d.style.animationDuration = dur + 's';
+	      d.style.animationDelay = (Math.random() * 2) + 's';
+	
+	      bg.appendChild(d);
+	    }
+	  })();
+	
+	  /* ================= SECRET MESSAGE ================= */
+	  const secretBox = document.getElementById('secretBox');
+	  const secretMessage = document.getElementById('secretMessage');
+	
+	  if(secretBox && secretMessage){
+	    function toggleSecret(){
+	      const open = secretMessage.style.display === 'block';
+	      secretMessage.style.display = open ? 'none' : 'block';
+	      secretBox.setAttribute('aria-pressed', (!open).toString());
+	
+	      if (!open) {
+	        secretMessage.setAttribute('tabindex','-1');
+	        secretMessage.focus({ preventScroll:true });
+	      }
+	    }
+	
+	    secretBox.addEventListener('click', toggleSecret);
+	    secretBox.addEventListener('keydown', e => {
+	      if(e.key === 'Enter' || e.key === ' ') {
+	        e.preventDefault();
+	        toggleSecret();
+	      }
+	    });
+	  }
+	
+	  /* ================= KAARTJIE BOEKE ================= */
+	  const books = {};
+	
+	  function initBook(bookId){
+	    const pages = document.querySelectorAll(`#${bookId} .page`);
+	    if(!pages.length) return;
+	
+	    books[bookId] = { pages, index: 0 };
+	    updateBook(bookId);
+	  }
+	
+	  function updateBook(bookId){
+	    const book = books[bookId];
+	    if(!book) return;
+	
+	    book.pages.forEach((p, i) => {
+	      p.classList.remove("active", "past");
+	      if(i === book.index) p.classList.add("active");
+	      else if(i < book.index) p.classList.add("past");
+	    });
+	
+	    const indicator = document.getElementById(`indicator-${bookId}`);
+	    if(indicator){
+	      indicator.innerText =
+	        `Bladsy ${book.index + 1} van ${book.pages.length}`;
+	    }
+	  }
+	
+	  window.nextPage = function(bookId){
+	    if(books[bookId] && books[bookId].index < books[bookId].pages.length - 1){
+	      books[bookId].index++;
+	      updateBook(bookId);
+	    }
+	  }
+	
+	  window.prevPage = function(bookId){
+	    if(books[bookId] && books[bookId].index > 0){
+	      books[bookId].index--;
+	      updateBook(bookId);
+	    }
+	  }
+	
+	  initBook("bookN");
+	  initBook("bookK");
+	
+	});
+	</script>
+
+
 
 
 

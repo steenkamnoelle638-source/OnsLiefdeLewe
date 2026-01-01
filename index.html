@@ -352,47 +352,79 @@
 	}
 
 	/* ====================================== KAARTJIES ====================================== */
+	.page{
+	  max-width:1200px;
+	  margin:auto;
+	  padding:2rem 1rem 5rem;
+	  position:relative;
+	  z-index:2;
+	}
+	
+	h1,h2{
+	  text-align:center;
+	}
+	
+	/* ================= CARD CONTAINER ================= */
 	.book-wrapper{
 	  margin:3rem auto;
 	  text-align:center;
 	}
 	
+	/* ================= CARD SIZE (A5-ish) ================= */
 	.book{
-	  width:280px;
-	  height:380px;
+	  width:420px;
+	  height:595px;
 	  margin:1rem auto;
 	  position:relative;
-	  perspective:1400px;
+	  overflow:hidden;
+	  background:white;
+	  cursor:pointer;
+	  user-select:none;
 	}
 	
-	/* 🔥 BELANGRIK: card-page (nie page nie!) */
+	@media(max-width:600px){
+	  .book{
+	    width:90vw;
+	    height:128vw;
+	    max-height:580px;
+	  }
+	}
+	
+	/* ================= CARD PAGES ================= */
 	.card-page{
 	  position:absolute;
 	  inset:0;
-	  background:#fff;
-	  border-radius:12px;
-	  box-shadow:0 14px 40px rgba(199,0,98,0.18);
-	  transform-origin:left;
-	  transform:rotateY(180deg);
-	  transition:transform .8s ease;
-	  backface-visibility:hidden;
-	  overflow:hidden;
+	  background:white;
+	  opacity:0;
+	  transform:translateX(40px);
+	  transition:
+	    opacity .6s ease,
+	    transform .6s ease;
 	}
 	
 	.card-page img{
 	  width:100%;
 	  height:100%;
-	  object-fit:cover;
+	  object-fit:contain;
 	}
 	
 	.card-page.active{
-	  transform:rotateY(0deg);
+	  opacity:1;
+	  transform:translateX(0);
 	  z-index:2;
 	}
 	
-	.card-page.past{
-	  transform:rotateY(-180deg);
+	.card-page.prev{
+	  opacity:0;
+	  transform:translateX(-40px);
 	  z-index:1;
+	}
+	
+	/* ================= HINT ================= */
+	.hint{
+	  font-size:.85rem;
+	  color:#666;
+	  margin-top:.5rem;
 	}
 
     /* ====================================== Footer ====================================== */
@@ -757,54 +789,38 @@
 	
 	<!-- ====================================== ONS KAARTJIES AAN MEKAAR ====================================== -->
 		<!-- maak kaartjies blaaibaar en al sodat soos regte kaartjie is -->
+	<div id="heartsBg"></div>
 
+	<div class="page">
 	<h2 style="text-align:center;">💌 Ons Kaartjies vir Mekaar</h2>
 	  
 	  <!-- ----------------------- Kaartjie ----------------------- -->
 	  <div class="book-wrapper">
-	    <h2>Van Noelle</h2>
+	    <h2>Noelle se kaartjie</h2>
 	
 	    <div class="book" id="bookN">
-	      <div class="card-page active">
-	        <img src="N_3MonthKersKaartie.jpeg">
-	      </div>
-	      <div class="card-page">
-	        <img src="NKaartjieBl1.jpeg">
-	      </div>
-	      <div class="card-page">
-	        <img src="NKaartjieBl2.jpeg">
-	      </div>
+	      <div class="card-page active"><img src="N_3MonthKersKaartie.jpeg"></div>
+	      <div class="card-page"><img src="NKaartjieBl1.jpeg"></div>
+	      <div class="card-page"><img src="NKaartjieBl2.jpeg"></div>
 	    </div>
 	
-	    <div class="controls">
-	      <button onclick="prevPage('bookN')">←</button>
-	      <button onclick="nextPage('bookN')">→</button>
-	    </div>
-	    <div class="indicator" id="indicator-bookN"></div>
+	    <div class="hint">Tik of swipe om te blaai</div>
 	  </div>
 	
-	  <!-- ==================== KAARTJIE 2 ==================== -->
+	  <!-- ----------------------- Kaartjie ----------------------- -->
 	  <div class="book-wrapper">
-	    <h2>Van Keegan</h2>
+	    <h2>Sy kaartjie</h2>
 	
 	    <div class="book" id="bookK">
-	      <div class="card-page active">
-	        <img src="KKaartjieVoor.jpeg">
-	      </div>
-	      <div class="card-page">
-	        <img src="KKaartjieBl1.jpeg">
-	      </div>
-	      <div class="card-page">
-	        <img src="KKaartjieBl2.jpeg">
-	      </div>
+	      <div class="card-page active"><img src="KKaartjieVoor.jpeg"></div>
+	      <div class="card-page"><img src="KKaartjieBl1.jpeg"></div>
+	      <div class="card-page"><img src="KKaartjieBl2.jpeg"></div>
 	    </div>
 	
-	    <div class="controls">
-	      <button onclick="prevPage('bookK')">←</button>
-	      <button onclick="nextPage('bookK')">→</button>
-	    </div>
-	    <div class="indicator" id="indicator-bookK"></div>
+	    <div class="hint">Tik of swipe om te blaai</div>
 	  </div>
+	
+	</div>
 
 	<!-- ====================================== LYS INSIDE JOKES ====================================== -->
 		<!-- wil somewhere in die future 'n lys van inside jokes en verduideliking insit -->
@@ -932,77 +948,71 @@
 
   <!-- ====================================== Scripts ====================================== -->
 	<script>
-	/* FLOATING HEARTS */
-	(function createHearts(){
-	  const bg = document.getElementById('heartsBg');
-	  const hearts = ['💗','💕','💖','❤️','💝'];
-	  for(let i=0;i<12;i++){
-	    const h = document.createElement('div');
-	    h.className = 'heart-f';
-	    h.innerText = hearts[i % hearts.length];
-	    h.style.left = (Math.random()*100)+'vw';
-	    h.style.fontSize = (14 + Math.random()*20)+'px';
-	    h.style.animationDuration = (6 + Math.random()*6)+'s';
-	    h.style.animationDelay = (Math.random()*3)+'s';
-	    bg.appendChild(h);
-	  }
-	})();
-	
-	/* SECRET NOTE */
-	const secretBox = document.getElementById('secretBox');
-	const secretMessage = document.getElementById('secretMessage');
-	
-	function toggleSecret(){
-	  const open = secretMessage.style.display === 'block';
-	  secretMessage.style.display = open ? 'none' : 'block';
-	  secretBox.setAttribute('aria-pressed', (!open).toString());
-	}
-	
-	secretBox.addEventListener('click', toggleSecret);
-	secretBox.addEventListener('keydown', e=>{
-	  if(e.key === 'Enter' || e.key === ' '){
-	    e.preventDefault();
-	    toggleSecret();
-	  }
-	});
-	
-	/* BOOK LOGIC */
-	const books = {};
-	
-	function initBook(bookId){
-	  const pages = document.querySelectorAll(`#${bookId} .card-page`);
-	  books[bookId] = { pages, index:0 };
-	  updateBook(bookId);
-	}
-	
-	function updateBook(bookId){
-	  const book = books[bookId];
-	  book.pages.forEach((p,i)=>{
-	    p.classList.remove('active','past');
-	    if(i === book.index) p.classList.add('active');
-	    else if(i < book.index) p.classList.add('past');
-	  });
-	  document.getElementById(`indicator-${bookId}`).innerText =
-	    `Bladsy ${book.index+1} van ${book.pages.length}`;
-	}
-	
-	function nextPage(bookId){
-	  if(books[bookId].index < books[bookId].pages.length-1){
-	    books[bookId].index++;
-	    updateBook(bookId);
-	  }
-	}
-	
-	function prevPage(bookId){
-	  if(books[bookId].index > 0){
-	    books[bookId].index--;
-	    updateBook(bookId);
-	  }
-	}
-	
-	initBook('bookN');
-	initBook('bookK');
-	</script>
-	
-	</body>
-	</html>
+	<script>
+/* ================= HEARTS ================= */
+(function(){
+  const bg=document.getElementById("heartsBg");
+  const hearts=["💗","💕","💖","❤️","💝"];
+  for(let i=0;i<12;i++){
+    const h=document.createElement("div");
+    h.className="heart-f";
+    h.innerText=hearts[i%hearts.length];
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=14+Math.random()*20+"px";
+    h.style.animationDuration=6+Math.random()*6+"s";
+    bg.appendChild(h);
+  }
+})();
+
+/* ================= CARD LOGIC ================= */
+function initBook(bookId){
+  const book=document.getElementById(bookId);
+  const pages=[...book.querySelectorAll(".card-page")];
+  let index=0;
+
+  function show(i){
+    pages.forEach((p,idx)=>{
+      p.classList.remove("active","prev");
+      if(idx===i) p.classList.add("active");
+      else if(idx<i) p.classList.add("prev");
+    });
+  }
+
+  function next(){
+    if(index<pages.length-1){
+      index++;
+      show(index);
+    }
+  }
+
+  function prev(){
+    if(index>0){
+      index--;
+      show(index);
+    }
+  }
+
+  /* Click */
+  book.addEventListener("click",next);
+
+  /* Swipe */
+  let startX=null;
+  book.addEventListener("touchstart",e=>{
+    startX=e.touches[0].clientX;
+  });
+
+  book.addEventListener("touchend",e=>{
+    if(startX===null) return;
+    const diff=e.changedTouches[0].clientX-startX;
+    if(diff<-40) next();
+    if(diff>40) prev();
+    startX=null;
+  });
+}
+
+initBook("bookN");
+initBook("bookK");
+</script>
+
+</body>
+</html>

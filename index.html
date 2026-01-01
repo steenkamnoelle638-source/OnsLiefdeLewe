@@ -375,6 +375,82 @@
       .lyrics { font-size:17px; padding:18px; }
     }
 
+	/* ====================================== KAARTJIES ====================================== */
+	.cards-wrapper{
+	  display:flex;
+	  justify-content:center;
+	  gap:40px;
+	  flex-wrap:wrap;
+	  margin:40px 0;
+	}
+	
+	.card-container{
+	  text-align:center;
+	}
+	
+	.card-book{
+	  display:flex;
+	  align-items:center;
+	  gap:12px;
+	}
+	
+	.book{
+	  width:320px;
+	  height:420px;
+	  position:relative;
+	  perspective:1400px;
+	}
+	
+	.page{
+	  position:absolute;
+	  inset:0;
+	  background:#fff;
+	  border-radius:10px;
+	  box-shadow:0 14px 40px rgba(199,0,98,0.18);
+	  transform-origin:left;
+	  transform:rotateY(180deg);
+	  transition:transform .8s ease;
+	  backface-visibility:hidden;
+	  overflow:hidden;
+	}
+	
+	.page img{
+	  width:100%;
+	  height:100%;
+	  object-fit:cover;
+	}
+	
+	.page.active{
+	  transform:rotateY(0deg);
+	  z-index:2;
+	}
+	
+	.page.past{
+	  transform:rotateY(-180deg);
+	  z-index:1;
+	}
+	
+	.nav-btn{
+	  background:#fff0f7;
+	  border:none;
+	  font-size:26px;
+	  padding:8px 14px;
+	  border-radius:50%;
+	  cursor:pointer;
+	  color:#c70062;
+	  box-shadow:0 6px 18px rgba(199,0,98,.25);
+	}
+	
+	.nav-btn:hover{
+	  transform:scale(1.1);
+	}
+	
+	.page-indicator{
+	  margin-top:10px;
+	  font-family:"Dancing Script",cursive;
+	  color:#c70062;
+	}
+
   </style>
 </head>
 
@@ -689,11 +765,11 @@
 		<div class="card gift-card">
 		  <img src="Eendjie.jpeg" alt="Eendjie">
 		  <div class="gift-date">23 Desember 2025</div>
-		  <div class="gift-from">Van jou, vir mu 💗</div>
+		  <div class="gift-from">Van jou, vir my 💗</div>
 		  <div>
 			3D Printed Eendjie –  
 			'n Eendjie gemaak vir ons 3 month aniversary asook vir kersfees<br> 
-			<center><strong>𝒩 ♡ 𝒦</strong></center>
+			<center><strong>˗ˏˋ 𓅰 ˎˊ˗</strong></center>
 		  </div>
 		</div>
 
@@ -707,12 +783,69 @@
 			<center><strong>🎟📽</strong></center>
 		  </div>
 		</div>
-
-	  <!-- ----------------------- Afdeling vir kaartjies insit ----------------------- -->
-		  <!-- maak kaartjies blaaibaar en al sodat soos regte kaartjie is -->
-		
 	  </div>
 	</div>
+
+	
+	<!-- ====================================== ONS KAARTJIES AAN MEKAAR ====================================== -->
+		<!-- maak kaartjies blaaibaar en al sodat soos regte kaartjie is -->
+
+	<h2 style="text-align:center;">💌 Ons Kaartjies vir Mekaar</h2>
+
+	<div class="cards-wrapper">
+	
+	  <!-- ----------------------- Kaartjie ----------------------- -->
+	  <div class="card-container">
+	    <h3>Van Noelle 💗</h3>
+	
+	    <div class="card-book">
+	      <button class="nav-btn" onclick="prevPage('bookN')">‹</button>
+	
+	      <div class="book" id="bookN">
+	        <div class="page active">
+	          <img src="N_3MonthKersKaartie.jpeg" alt="Voorblad">
+	        </div>
+	        <div class="page">
+	          <img src="NKaartjieBl1.jpeg" alt="Binne bladsy 1">
+	        </div>
+	        <div class="page">
+	          <img src="NKaartjieBl2.jpeg" alt="Binne bladsy 2">
+	        </div>
+	      </div>
+	
+	      <button class="nav-btn" onclick="nextPage('bookN')">›</button>
+	    </div>
+	
+	    <div class="page-indicator" id="indicator-bookN"></div>
+	  </div>
+	
+	   <!-- ----------------------- Kaartjie ----------------------- -->
+	  <div class="card-container">
+	    <h3>Van Hom 💙</h3>
+	
+	    <div class="card-book">
+	      <button class="nav-btn" onclick="prevPage('bookK')">‹</button>
+	
+	      <div class="book" id="bookK">
+	        <div class="page active">
+	          <img src="KKaartjieVoor.jpeg" alt="Voorblad">
+	        </div>
+	        <div class="page">
+	          <img src="KKaartjieBl1.jpeg" alt="Binne bladsy 1">
+	        </div>
+	        <div class="page">
+	          <img src="KKaartjieBl2.jpeg" alt="Binne bladsy 2">
+	        </div>
+	      </div>
+	
+	      <button class="nav-btn" onclick="nextPage('bookK')">›</button>
+	    </div>
+	
+	    <div class="page-indicator" id="indicator-bookK"></div>
+	  </div>
+	
+	</div>
+
 
 	<!-- ====================================== LYS INSIDE JOKES ====================================== -->
 		<!-- wil somewhere in die future 'n lys van inside jokes en verduideliking insit -->
@@ -881,8 +1014,48 @@
       if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleSecret(); }
     });
   </script>
+
+  <script>
+  const books = {};
+
+  function initBook(bookId){
+    const pages = document.querySelectorAll(`#${bookId} .page`);
+    books[bookId] = { pages, index: 0 };
+    updateBook(bookId);
+  }
+
+  function updateBook(bookId){
+    const book = books[bookId];
+    book.pages.forEach((p,i)=>{
+      p.classList.remove("active","past");
+      if(i === book.index) p.classList.add("active");
+      else if(i < book.index) p.classList.add("past");
+    });
+    document.getElementById(`indicator-${bookId}`).innerText =
+      `Bladsy ${book.index + 1} van ${book.pages.length}`;
+  }
+
+  function nextPage(bookId){
+    if(books[bookId].index < books[bookId].pages.length - 1){
+      books[bookId].index++;
+      updateBook(bookId);
+    }
+  }
+
+  function prevPage(bookId){
+    if(books[bookId].index > 0){
+      books[bookId].index--;
+      updateBook(bookId);
+    }
+  }
+
+  initBook("bookN");
+  initBook("bookK");
+</script>
+	
 </body>
 </html>
+
 
 
 

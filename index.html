@@ -987,11 +987,13 @@ function initBook(bookId){
   }
 
   function next(){
-    if(index < pages.length - 1){
-      index++;
-      show(index);
-    }
-  }
+	  if(index < pages.length - 1){
+	    index++;
+	  } else {
+	    index = 0; // gaan terug na eerste bladsy
+	  }
+	  show(index);
+	}
 
   function prev(){
     if(index > 0){
@@ -1027,5 +1029,6 @@ initBook("bookK");
 	  /* test */
 </body>
 </html>
+
 
 

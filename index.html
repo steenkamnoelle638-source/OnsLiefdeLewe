@@ -359,79 +359,82 @@
 	}
 
 	/* ====================================== KAARTJIES ====================================== */
-	.page{
-	  max-width:1200px;
-	  margin:auto;
-	  padding:2rem 1rem 5rem;
+	.book {
+	  perspective: 1600px;
+	}
+	
+	.card-3d {
+	  width:100%;
+	  height:100%;
 	  position:relative;
-	  z-index:2;
+	  transform-style: preserve-3d;
+	  transition: transform 1.2s cubic-bezier(.4,.2,.2,1);
 	}
 	
-	h1,h2{
-	  text-align:center;
+	.book.open .card-3d {
+	  transform: rotateY(-180deg);
 	}
 	
-	/* ================= CARD CONTAINER ================= */
-	.book-wrapper{
-	  margin:3rem auto;
-	  text-align:center;
-	}
-	
-	/* ================= CARD SIZE (A5-ish) ================= */
-	.book{
-	  width:420px;
-	  height:595px;
-	  margin:1rem auto;
-	  position:relative;
-	  overflow:hidden;
-	  background:white;
-	  cursor:pointer;
-	  user-select:none;
-	}
-	
-	@media(max-width:600px){
-	  .book{
-	    width:90vw;
-	    height:128vw;
-	    max-height:580px;
-	  }
-	}
-	
-	/* ================= CARD PAGES ================= */
-	.card-page{
+	/* VOORBLAD */
+	.card-front {
 	  position:absolute;
 	  inset:0;
 	  background:white;
-	  opacity:0;
-	  transform:translateX(40px);
-	  transition:
-	    opacity .6s ease,
-	    transform .6s ease;
+	  backface-visibility: hidden;
 	}
 	
-	.card-page img{
+	.card-front img {
 	  width:100%;
 	  height:100%;
 	  object-fit:contain;
 	}
 	
-	.card-page.active{
-	  opacity:1;
-	  transform:translateX(0);
-	  z-index:2;
+	/* BINNEKAART (A4 spread) */
+	.card-inside {
+	  position:absolute;
+	  inset:0;
+	  display:flex;
+	  background:#fffdf8;
+	  transform: rotateY(180deg);
+	  backface-visibility: hidden;
 	}
 	
-	.card-page.prev{
-	  opacity:0;
-	  transform:translateX(-40px);
-	  z-index:1;
+	.inside-page {
+	  width:50%;
+	  padding:28px;
+	  box-sizing:border-box;
+	  font-size:17px;
+	  line-height:1.6;
+	  color:#5a0037;
+	  overflow:auto;
 	}
 	
-	/* ================= HINT ================= */
-	.hint{
-	  font-size:.85rem;
-	  color:#666;
-	  margin-top:.5rem;
+	.inside-page.left {
+	  border-right:1px solid #f2c6da;
+	}
+	
+	.inside-page h3 {
+	  font-family:"Dancing Script",cursive;
+	  font-size:26px;
+	  color:#c70062;
+	  margin-bottom:14px;
+	}
+	
+	/* Papier gevoel */
+	.inside-page {
+	  background:
+	    linear-gradient(90deg,
+	      rgba(255,255,255,.95),
+	      rgba(255,245,250,.95)
+	    );
+	}
+	
+	/* Responsive */
+	@media(max-width:700px){
+	  .inside-page{
+	    font-size:15px;
+	    padding:18px;
+	  }
 	}
 
     /* ====================================== Footer ====================================== */
@@ -802,29 +805,69 @@
 	<h2 style="text-align:center;">💌 Ons Kaartjies vir Mekaar</h2>
 	  
 	  <!-- ----------------------- Kaartjie ----------------------- -->
-	  <div class="book-wrapper">
-	    <h2>Van Noelle</h2>
-	
-	    <div class="book" id="bookN">
-	      <div class="card-page active"><img src="N_3MonthKersKaartie.jpeg"></div>
-	      <div class="card-page"><img src="NKaartjieBl1.jpeg"></div>
-	      <div class="card-page"><img src="NKaartjieBl2.jpeg"></div>
-	    </div>
-	
-	    <div class="hint">Tik of swipe om te blaai</div>
-	  </div>
+		<div class="book-wrapper">
+		  <center><span style="font-size: 30px;">Van Noelle</span></center>
+		
+		  <div class="book" id="bookN">
+		    <div class="card-3d">
+		
+		      <!-- VOORBLAD -->
+		      <div class="card-front">
+		        <img src="N_3MonthKersKaartie.jpeg">
+		      </div>
+		
+		      <!-- BINNEKAART -->
+		      <div class="card-inside">
+		
+		        <!-- LINKS -->
+		        <div class="inside-page left">
+		          <h3>Geseënde Kersfees & Happy 3-Month Anniversary</h3>
+		
+		          Geseënde Kersfees en happy 3-month anniversary 💗<br><br>
+		
+		          Ek is so so dankbaar om jou in my lewe te hê liefie en even meer dankbaar
+		          dat jy my toelaat om jou nooi te wees. Ek kan nie genoeg sê hoe baie ek
+		          jou liefhet en hoe dankbaar ek is dat jy in my lewe is nie.<br><br>
+		
+		          Jy het my ’n nuwe definisie van liefde gewys — een wat ek nie geweet het
+		          bestaan nie. Jy laat my geliefd, waardeer, veilig en tuis voel.
+		          Jy is my home, my safe place.<br><br>
+		
+		          Ek kan nie genoeg sê of wys hoe baie ek jou lief het nie.
+		          Dankie dat jy altyd daar is vir my en dat jy my gemak en gevoelens respekteer.
+		        </div>
+		
+		        <!-- REGS -->
+		        <div class="inside-page right">
+		          Jy is die eerste persoon met wie ek confidently oor ’n future kan praat,
+		          want ek weet ek wil ’n future met jou hê — en net jou.<br><br>
+		
+		          Ek sien ongelooflik uit vir DLC 2 en 3 en alles wat nog vir ons wag.
+		          Ek kies jou — elke oomblik en in elke leeftyd.<br><br>
+		
+		          Ek lief jou ongelooflik baie, Keegan 💗<br><br>
+		
+		          Met baie liefde,<br>
+		          <strong>Noelle</strong><br><br>
+		
+		          <img src="JOU_BINNE_PRENTJIE.jpeg" style="width:100%;border-radius:10px;">
+		        </div>
+		
+		      </div>
+		    </div>
+		  </div>
+		
+		</div>
 	
 	  <!-- ----------------------- Kaartjie ----------------------- -->
 	  <div class="book-wrapper">
-	    <h2>Van Keegan</h2>
+	    <center><span style="font-size: 30px;">Keegan se kaartjie</span></center>
 	
 	    <div class="book" id="bookK">
 	      <div class="card-page active"><img src="KKaartjieVoor.jpeg"></div>
 	      <div class="card-page"><img src="KKaartjieBl1.jpeg"></div>
 	      <div class="card-page"><img src="KKaartjieBl2.jpeg"></div>
 	    </div>
-	
-	    <div class="hint">Tik of swipe om te blaai</div>
 	  </div>
 	
 	</div>
@@ -976,60 +1019,36 @@
 })();
 
 /* ================= CARD LOGIC ================= */
-function initBook(bookId){
-  const book = document.getElementById(bookId);
-  if(!book) return;
-
-  const pages = [...book.querySelectorAll(".card-page")];
-  let index = 0;
-
-  /* maak seker images steel nie click nie */
-  book.querySelectorAll("*").forEach(el=>{
-    el.style.pointerEvents = "none";
-  });
-
-  function show(i){
-    pages.forEach((p,idx)=>{
-      p.classList.remove("active","prev");
-      if(idx === i) p.classList.add("active");
-      else if(idx < i) p.classList.add("prev");
-    });
-  }
-
-  function next(){
-    index = (index + 1) % pages.length; // loop vorentoe oneindig
-    show(index);
-  }
-
-  function prev(){
-    index = (index - 1 + pages.length) % pages.length; // loop agtertoe oneindig
-    show(index);
-  }
-
-  /* CLICK */
-  book.addEventListener("click", next);
-
-  /* SWIPE */
-  let startX = null;
-
-  book.addEventListener("touchstart", e=>{
-    startX = e.touches[0].clientX;
-  }, {passive:true});
-
-  book.addEventListener("touchend", e=>{
-    if(startX === null) return;
-    const diff = e.changedTouches[0].clientX - startX;
-    if(diff < -40) next();
-    if(diff > 40) prev();
-    startX = null;
-  });
-}
-
-/* init albei kaartjies */
-initBook("bookN");
-initBook("bookK");
-</script>
+	function initBook(id){
+	  const book = document.getElementById(id);
+	  if(!book) return;
+	
+	  let open = false;
+	
+	  book.addEventListener("click",()=>{
+	    open = !open;
+	    book.classList.toggle("open", open);
+	  });
+	
+	  let startX = null;
+	  book.addEventListener("touchstart",e=>{
+	    startX = e.touches[0].clientX;
+	  },{passive:true});
+	
+	  book.addEventListener("touchend",e=>{
+	    if(startX === null) return;
+	    const diff = e.changedTouches[0].clientX - startX;
+	    if(Math.abs(diff) > 40){
+	      open = !open;
+	      book.classList.toggle("open", open);
+	    }
+	    startX = null;
+	  });
+	}
+	
+	initBook("bookN");
+	initBook("bookK");
+	</script>
 
 </body>
 </html>
-

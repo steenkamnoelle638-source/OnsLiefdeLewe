@@ -545,31 +545,29 @@
 	
 	/* ---------- Kopband van blokkie ---------- */
 	.pink-block-header {
-	 /* background: #ffb6d2; /* donkerder pienk */
-	 background: linear-gradient(to bottom, #ffb6d2 0%, rgba(255, 180, 210, 0) 75%);
 	  position: relative;
 	  font-family: "Dancing Script", cursive;
 	  font-size: 24px; /* groter opskrif */
 	  font-weight: bold;
-	  color: var(--accent); /* soliede teks */
+	  color: var(--accent); /* tekskleur */
 	  text-align: center;
 	  padding: 12px 0;
-	  /* optional subtle shadow for glow */
- 	  box-shadow: inset 0 -8px 12px rgba(255, 182, 210, 0.4);
+	
+	  /* Donkerder pienk agtergrond self */
+	  background: linear-gradient(to bottom, #ff7bb1 0%, #ffb6d2 100%);
 	}
 	
-	/* Gradient glow onder die teks */
-	/*.pink-block-header::after {
+	/* Gradient glow onder die teks (vervaag na ligte pienk) */
+	.pink-block-header::after {
 	  content: "";
 	  position: absolute;
 	  left: 0;
-	  bottom: 0; /* begin onder die teks */
-	    /* optional subtle shadow for glow */
-    /*width: 100%;
+	  bottom: -1px; /* effens onder die header */
+	  width: 100%;
 	  height: 12px; /* hoogte van glow */
-	/*background: linear-gradient(to bottom, #ffb6d2 0%, rgba(255, 180, 210, 0) 100%);
+	  background: linear-gradient(to bottom, rgba(255,123,177,0.6), rgba(255,228,242,0));
 	  pointer-events: none;
-	}*/
+	}
 	
 	.pink-block ul {
 	  list-style: none;
@@ -1283,6 +1281,7 @@
 </body>
 </html>
 </html>
+
 
 
 

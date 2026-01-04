@@ -520,7 +520,58 @@
 	  transform: translateY(-50%);
 	}
 
-    /* ====================================== Footer ====================================== */
+    /* ====================================== DLC BLOKKE ====================================== */
+	.pink-blocks {
+	  display: grid;
+	  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	  gap: 20px;
+	  max-width: 1000px;
+	  margin: 30px auto;
+	  padding: 0 12px;
+	}
+	
+	/* -------------------- Individuele blokkies -------------------- */
+	.pink-block {
+	  background: #ffe4f2;  /* ligte pienk */
+	  padding: 18px;
+	  border-radius: 12px;
+	  box-shadow: 0 8px 24px rgba(199, 0, 98, 0.08);
+	  transition: transform 0.28s ease, box-shadow 0.28s ease;
+	}
+	
+	.pink-block:hover {
+	  transform: translateY(-4px);
+	  box-shadow: 0 12px 36px rgba(199, 0, 98, 0.12);
+	}
+	
+	.pink-block h3 {
+	  font-family: "Dancing Script", cursive;
+	  color: #d33b85; /* ligter accent kleur */
+	  margin-bottom: 12px;
+	  text-align: center;
+	}
+	
+	.pink-block ul {
+	  list-style: none;
+	  padding-left: 0;
+	}
+	
+	.pink-block li {
+	  padding: 6px 0;
+	  font-size: 16px;
+	  line-height: 1.5;
+	  color: #5a0037;
+	  position: relative;
+	}
+	
+	.pink-block li::before {
+	  content: "❤︎"; /* hartjie bullet */
+	  position: absolute;
+	  left: -24px;
+	  color: #ff5c9d;
+	}
+	  
+	  /* ====================================== Footer ====================================== */
     .footer {
       margin-top:30px;
       text-align:center;
@@ -997,16 +1048,46 @@
 
 	<ul class="inside-jokes">
 	  <li>Canta</li>
+	  <li>Less than three</li>
 	</ul>
 
 
 	<!-- ====================================== DLC's ====================================== -->
 	  	<!-- Lys v. 3 dlc en hul 'achievements' asook dalk fotos van soos cuddel poses dalk? -->
-	<h3 style="text-align:center; font-size: 25px; font-family: 'Dancing Script'; color: #d33b85;">Die DLC's</h3>
-
+	<h3 style="text-align:center; font-size: 30px; font-family: 'Dancing Script'; color: #d33b85;">Die DLC's</h3>
+		
+	<div class="pink-blocks">
+	  <div class="pink-block">
+	    <h3>DLC 1</h3>
+	    <ul>
+	      <li>Item 1A</li>
+	      <li>Item 1B</li>
+	      <li>Item 1C</li>
+	    </ul>
+	  </div>
+	
+	  <div class="pink-block">
+	    <h3>DLC 2</h3>
+	    <ul>
+	      <li>Item 2A</li>
+	      <li>Item 2B</li>
+	      <li>Item 2C</li>
+	    </ul>
+	  </div>
+	
+	  <div class="pink-block">
+	    <h3>DLC 3</h3>
+	    <ul>
+	      <li>Item 3A</li>
+	      <li>Item 3B</li>
+	      <li>Item 3C</li>
+	    </ul>
+	  </div>
+	</div>
+		
 	<!-- ====================================== FEM MC & KEAGON LORE ====================================== -->
 		<!-- wil somewhere in die future die storie (dalk illustrasie) van fem mc en Keagon insit (Titel: Storie van fem MC en Keagon) -->
-	<h3 style="text-align:center; font-size: 25px; font-family: 'Dancing Script'; color: #d33b85">Fem MC & Keagon lore</h3>
+	<h3 style="text-align:center; font-size: 30px; font-family: 'Dancing Script'; color: #d33b85">Fem MC & Keagon lore</h3>
 	
 	<!-- ====================================== MY LERIEKE ====================================== -->
     <h2 style="text-align: center;">♡ Lirieke van my liedjie</h2>
@@ -1180,6 +1261,7 @@
 </body>
 </html>
 </html>
+
 
 
 

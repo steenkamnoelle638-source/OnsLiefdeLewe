@@ -400,13 +400,16 @@
 	}
 	
 	.inside-page {
-	  width:50%;
-	  padding:28px;
-	  box-sizing:border-box;
-	  font-size:17px;
-	  line-height:1.6;
-	  color:#5a0037;
-	  overflow:auto;
+	  width: 50%;
+	  padding: 26px;
+	  box-sizing: border-box;
+	  font-size: 16px;
+	  line-height: 1.55;
+	  color: #5a0037;
+	  overflow: hidden;      /* 🔥 GEEN SCROLL */
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: space-between;
 	}
 	
 	.inside-page.left {
@@ -430,11 +433,17 @@
 	}
 
 	.book {
-	  width: 320px;
-	  height: 420px;
-	  margin: 20px auto;
+	  width: 360px;        /* TOE kaart grootte */
+	  height: 480px;
+	  margin: 30px auto;
 	  position: relative;
 	  perspective: 1600px;
+	}
+	
+	/* Wanneer oop – voel soos A4 spread */
+	.book.open {
+	  width: 720px;        /* 2 × 360px */
+	  height: 480px;
 	}
 	
 	.card-3d {
@@ -449,6 +458,14 @@
 	    font-size:15px;
 	    padding:18px;
 	  }
+	}
+
+	.inside-img {
+	  width: 100%;
+	  max-height: 160px;
+	  object-fit: contain;
+	  border-radius: 10px;
+	  margin-top: 12px;
 	}
 
     /* ====================================== Footer ====================================== */
@@ -864,7 +881,7 @@
 		          Met baie liefde,<br>
 		          <strong>Noelle</strong><br><br>
 		
-		          <img src="JOU_BINNE_PRENTJIE.jpeg" style="width:100%;border-radius:10px;">
+		          <img src="JOU_BINNE_PRENTJIE.jpeg" class="inside-img">
 		        </div>
 		
 		      </div>
@@ -889,11 +906,11 @@
 	      <div class="card-inside">
 	
 	        <div class="inside-page left">
-	          <img src="KKaartjieBl1.jpeg" style="width:100%;border-radius:10px;">
+	          <img src="KKaartjieBl1.jpeg" class="inside-img">
 	        </div>
 	
 	        <div class="inside-page right">
-	          <img src="KKaartjieBl2.jpeg" style="width:100%;border-radius:10px;">
+	          <img src="KKaartjieBl2.jpeg" class="inside-img">
 	        </div>
 	
 	      </div>
@@ -1081,4 +1098,5 @@
 
 </body>
 </html>
+
 

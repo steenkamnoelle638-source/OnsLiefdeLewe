@@ -546,6 +546,7 @@
 	/* ---------- Kopband van blokkie ---------- */
 	.pink-block-header {
 	 /* background: #ffb6d2; /* donkerder pienk */
+	 background: linear-gradient(to bottom, #ffb6d2 0%, rgba(255, 180, 210, 0) 50%);
 	  position: relative;
 	  font-family: "Dancing Script", cursive;
 	  font-size: 24px; /* groter opskrif */
@@ -558,16 +559,17 @@
 	}
 	
 	/* Gradient glow onder die teks */
-	.pink-block-header::after {
+	/*.pink-block-header::after {
 	  content: "";
 	  position: absolute;
 	  left: 0;
 	  bottom: 0; /* begin onder die teks */
-	  width: 100%;
+	    /* optional subtle shadow for glow */
+    /*width: 100%;
 	  height: 12px; /* hoogte van glow */
-	  background: linear-gradient(to bottom, #ffb6d2 100%, rgba(255, 180, 210, 0) 0%);
+	/*background: linear-gradient(to bottom, #ffb6d2 0%, rgba(255, 180, 210, 0) 100%);
 	  pointer-events: none;
-	}
+	}*/
 	
 	.pink-block ul {
 	  list-style: none;
@@ -1281,6 +1283,7 @@
 </body>
 </html>
 </html>
+
 
 
 

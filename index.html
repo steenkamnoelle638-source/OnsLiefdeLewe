@@ -526,16 +526,15 @@
 	  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	  gap: 20px;
 	  max-width: 1000px;
-	  margin: 30px auto;
+	  margin: 20px auto;
 	  padding: 0 12px;
 	}
 	
-	/* -------------------- Individuele blokkies -------------------- */
 	.pink-block {
-	  background: #ffe4f2;  /* ligte pienk */
-	  padding: 18px;
+	  background: #ffe4f2; /* ligte pienk agtergrond */
 	  border-radius: 12px;
 	  box-shadow: 0 8px 24px rgba(199, 0, 98, 0.08);
+	  overflow: hidden; /* sodat die header nie buite die blokkie uitsteek nie */
 	  transition: transform 0.28s ease, box-shadow 0.28s ease;
 	}
 	
@@ -544,16 +543,22 @@
 	  box-shadow: 0 12px 36px rgba(199, 0, 98, 0.12);
 	}
 	
-	.pink-block h3 {
+	/* ---------- Kopband van blokkie ---------- */
+	.pink-block-header {
+	  background: #ffb6d2; /* donkerder pienk */
+	  color: #5a0037;
 	  font-family: "Dancing Script", cursive;
-	  color: #d33b85; /* ligter accent kleur */
-	  margin-bottom: 12px;
+	  font-size: 20px;
+	  font-weight: bold;
 	  text-align: center;
+	  padding: 12px 0;
+	  border-bottom: 2px solid #ff5c9d; /* subtiele skeiding tussen header en inhoud */
 	}
 	
 	.pink-block ul {
 	  list-style: none;
-	  padding-left: 0;
+	  padding: 12px 20px;
+	  margin: 0;
 	}
 	
 	.pink-block li {
@@ -565,7 +570,7 @@
 	}
 	
 	.pink-block li::before {
-	  content: "❤︎"; /* hartjie bullet */
+	  content: "❤︎";
 	  position: absolute;
 	  left: -24px;
 	  color: #ff5c9d;
@@ -1056,34 +1061,35 @@
 	  	<!-- Lys v. 3 dlc en hul 'achievements' asook dalk fotos van soos cuddel poses dalk? -->
 	<h3 style="text-align:center; font-size: 30px; font-family: 'Dancing Script'; color: #d33b85;">Die DLC's</h3>
 		
-	<div class="pink-blocks">
-	  <div class="pink-block">
-	    <h3>DLC 1</h3>
-	    <ul>
-	      <li>Item 1A</li>
-	      <li>Item 1B</li>
-	      <li>Item 1C</li>
-	    </ul>
-	  </div>
-	
-	  <div class="pink-block">
-	    <h3>DLC 2</h3>
-	    <ul>
-	      <li>Item 2A</li>
-	      <li>Item 2B</li>
-	      <li>Item 2C</li>
-	    </ul>
-	  </div>
-	
-	  <div class="pink-block">
-	    <h3>DLC 3</h3>
-	    <ul>
-	      <li>Item 3A</li>
-	      <li>Item 3B</li>
-	      <li>Item 3C</li>
-	    </ul>
-	  </div>
-	</div>
+	<!-- 3 ligte pienk blokkies -->
+  <div class="pink-blocks">
+    <div class="pink-block">
+      <div class="pink-block-header">📌 DLC 1</div>
+      <ul>
+        <li>Item 1A</li>
+        <li>Item 1B</li>
+        <li>Item 1C</li>
+      </ul>
+    </div>
+
+    <div class="pink-block">
+      <div class="pink-block-header">📌 DLC 2</div>
+      <ul>
+        <li>Item 2A</li>
+        <li>Item 2B</li>
+        <li>Item 2C</li>
+      </ul>
+    </div>
+
+    <div class="pink-block">
+      <div class="pink-block-header">📌 DLC 3</div>
+      <ul>
+        <li>Item 3A</li>
+        <li>Item 3B</li>
+        <li>Item 3C</li>
+      </ul>
+    </div>
+  </div>
 		
 	<!-- ====================================== FEM MC & KEAGON LORE ====================================== -->
 		<!-- wil somewhere in die future die storie (dalk illustrasie) van fem mc en Keagon insit (Titel: Storie van fem MC en Keagon) -->
@@ -1261,6 +1267,7 @@
 </body>
 </html>
 </html>
+
 
 
 

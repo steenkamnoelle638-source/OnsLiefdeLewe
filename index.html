@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
 
   <style>
 /* ==========================================================================
@@ -601,6 +602,63 @@
 	  font-weight: bold;
 	}
 	  
+	/* ====================================== Scrolls ====================================== */
+	.letters-section{
+	  text-align:center;
+	  margin:50px auto;
+	}
+	
+	.letters-section h2{
+	  font-family:"Dancing Script", cursive;
+	  font-size:38px;
+	  color:#c70062;
+	}
+	
+	.scroll{
+	  max-width:650px;
+	  margin:25px auto;
+	  background:#fdf2e9;
+	  border:2px solid #d8b58a;
+	  border-radius:12px;
+	  cursor:pointer;
+	  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+	  overflow:hidden;
+	  transition:all 0.6s ease;
+	}
+	
+	/* Scroll header (toe) */
+	.scroll-header{
+	  padding:18px;
+	  font-family:"IM Fell English", serif;
+	  font-size:20px;
+	  letter-spacing:0.5px;
+	  background:linear-gradient(#f7e2c5,#f2d2a8);
+	  color:#4a2c1a;
+	}
+	
+	/* Scroll content (toe) */
+	.scroll-content{
+	  max-height:0;
+	  padding:0 20px;
+	  opacity:0;
+	  transition:all 0.6s ease;
+	}
+	
+	/* Wanneer oop */
+	.scroll.open .scroll-content{
+	  max-height:600px;
+	  padding:25px;
+	  opacity:1;
+	}
+	
+	/* Tekst binne brief */
+	.scroll-content p{
+	  font-family:"Delius", cursive;
+	  font-size:16px;
+	  line-height:1.7;
+	  color:#5a0037;
+	}
+		  
 	  /* ====================================== Footer ====================================== */
     .footer {
       margin-top:30px;
@@ -1093,6 +1151,48 @@
 	  </div>
 	</div>
 
+	<!-- ====================================== ONS LOVE LETTERS ====================================== -->
+	<section class="letters-section">
+	  <h2>💌 Ons Liefdesbriewe</h2>
+	
+	  <!-- Scroll 1 -->
+	  <div class="scroll closed" onclick="toggleScroll(this)">
+	    <div class="scroll-header">
+	      📜 ’n Brief van Noelle aan haar kêrel
+	    </div>
+	    <div class="scroll-content">
+	      <p>
+	        My liefie,<br><br>
+	        Jy is my veilige plek.<br>
+	        My rus in ’n lawaaierige wêreld.<br><br>
+	        Elke dag kies ek jou – sonder twyfel.<br>
+	        Dankie dat jy my so sag liefhet.<br><br>
+	        Vir altyd joune,<br>
+	        Noelle 💗
+	      </p>
+	    </div>
+	  </div>
+	
+	  <!-- Scroll 2 -->
+	  <div class="scroll closed" onclick="toggleScroll(this)">
+	    <div class="scroll-header">
+	      📜 ’n Brief van my kêrel aan my
+	    </div>
+	    <div class="scroll-content">
+	      <p>
+	        My mooiste meisie,<br><br>
+	        Jy het my wêreld sagter gemaak.<br>
+	        Ek het nooit geweet liefde kan so voel nie.<br><br>
+	        Ek is dankbaar vir elke oomblik saam jou.<br>
+	        Ek kies jou, vandag en altyd.<br><br>
+	        Met liefde,<br>
+	        Jou kêrel 💑
+	      </p>
+	    </div>
+	  </div>
+	
+	</section>
+
 	<!-- ====================================== WAT ONS VAN MEKAAR GEDINK HET ====================================== -->
 		<!-- Ons impresions van mekaar voordat ons begin close raak het -->
 		
@@ -1492,10 +1592,16 @@
 	
 	initBook("bookN");
 	initBook("bookK");
+
+	/* ================= SCROLL ================= */
+	function toggleScroll(scroll){
+	  scroll.classList.toggle("open");
+	}
 	</script>
 
 </body>
 </html>
+
 
 
 

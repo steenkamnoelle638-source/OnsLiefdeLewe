@@ -686,6 +686,20 @@
 	    transform: translateY(0) scaleY(1);
 	  }
 	}
+
+	.scroll-body {
+	  position: relative;
+	}
+	
+	.scroll-body::after {
+	  content:"";
+	  position:absolute;
+	  inset:0;
+	  background:
+	    radial-gradient(circle at top left, rgba(120,40,20,0.15), transparent 40%),
+	    radial-gradient(circle at bottom right, rgba(120,40,20,0.12), transparent 45%);
+	  pointer-events:none;
+	}
 		  
 	  /* ====================================== Footer ====================================== */
     .footer {
@@ -1630,4 +1644,5 @@
 
 </body>
 </html>
+
 

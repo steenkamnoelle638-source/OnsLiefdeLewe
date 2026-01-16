@@ -709,4 +709,40 @@
       .lyrics { font-size:17px; padding:18px; }
     }
 
+	/* ===================================== Slot vir prent ======================================== */
+
+	#secretImage {
+    width: 300px;
+    transition: filter 0.4s ease;
+	}
+
+	.blurred {
+    filter: blur(10px);
+	}
+
+	.unlock-box {
+    margin-top: 10px;
+    text-align: center;
+	}
+
+	input {
+    padding: 6px;
+    border-radius: 6px;
+    border: none;
+	}
+
+	button {
+    padding: 6px 12px;
+    margin-left: 6px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff4d6d;
+    color: white;
+    cursor: pointer;
+	}
+
+	#errorMsg {
+    color: red;
+    margin-top: 6px;
+	}
 

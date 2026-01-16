@@ -72,3 +72,18 @@
 	function toggleScroll(el){
 	  el.classList.toggle("open");
 	}
+
+	/* ================ BLURR PRENT ============= */
+	function unlockImage() {
+	    const correctPassword = "23";
+	    const input = document.getElementById("passwordInput").value;
+	    const img = document.getElementById("secretImage");
+	    const errorMsg = document.getElementById("errorMsg");
+	
+	    if (input === correctPassword) {
+	        img.classList.remove("blurred");
+	        errorMsg.textContent = "";
+	    } else {
+	        errorMsg.textContent = "Verkeerde wagwoord 😅";
+	    }
+	}

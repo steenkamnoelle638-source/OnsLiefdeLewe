@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>📸 Ons Foto's</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --pink-1: #ffa4de;
+      --pink-2: #ffe4f5;
+      --accent: #c70062;
+      --text: #8b0044;
+      --soft-shadow: 10px 10px 23px rgba(120, 0, 60, 0.5);
+    }
+
+    body {
+      margin:0;
+      font-family: "Playfair Display", serif;
+      background: linear-gradient(#ffa4de, #ffe4f5);
+      color: var(--text);
+    }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 18px; box-sizing: border-box; }
+
+    h2 {
+      font-family: "Dancing Script", cursive;
+      font-size: 38px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      text-align:center;
+    }
+
+    .polaroid-row {
+      display:flex;
+      justify-content:center;
+      gap:22px;
+      flex-wrap:wrap;
+      margin-top:26px;
+      margin-bottom:18px;
+    }
+
+    .polaroid {
+      width: 280px;
+      background: white;
+      border-radius: 8px;
+      padding: 10px 10px 18px 10px;
+      box-shadow: 0px 9px 23px rgba(99, 0, 49, 0.3);
+      transform-origin: center;
+      transition: transform .28s ease, box-shadow .28s ease;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .polaroid img {
+      width: 100%;
+      border-radius: 6px;
+      display:block;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .polaroid figcaption {
+      margin-top:10px;
+      font-size:14px;
+      color:#8a204a;
+      font-family: "Dancing Script", cursive;
+      opacity:0.95;
+      text-align:center;
+    }
+
+    .polaroid:nth-child(1){ transform: rotate(-7deg); }
+    .polaroid:nth-child(2){ transform: rotate(6deg);  margin-top:8px;}
+    .polaroid:nth-child(3){ transform: rotate(-2deg); margin-top:4px; }
+    .polaroid:hover { transform: scale(1.05) rotate(0deg); box-shadow: 0 18px 40px rgba(199,0,98,0.12); }
+
+    .video-polaroid { transform: rotate(3deg); }
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 6px;
+      position: relative;
+      background: #000;
+    }
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+
+	/* ====================================== TERUG NA HOMEPAGE LINK STYLE ====================================== */
+	
+    a {
+      color: var(--accent);
+      text-decoration:none;
+      font-family:"Dancing Script", cursive;
+      font-size:22px;
+    }
+    a:hover { text-decoration:underline; }
+
+    @media(max-width:940px){
+      .polaroid { width: 42%; }
+    }
+    @media(max-width:520px){
+      .polaroid { width: 85%; transform: rotate(0deg); }
+      .polaroid:nth-child(1), .polaroid:nth-child(2), .polaroid:nth-child(3) { transform: rotate(0deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <h2>📸 Ons Foto's</h2>
+
+    <!-- Terug na hoofblad -->
+    <div style="text-align:center; margin:20px 0;">
+      <a href="index.html">🏠 Terug na hoofblad</a>
+    </div>
+
+    <!-- ------------------------ 2025 Fotos ------------------------ -->
+    <center><span style="font-size: 30px;">✧˚ ༘⋆2025✧˚ ༘ ⋆</span></center>
+
+    <!-- Hierdie was ons eerste date gewees wat ons by irene farm gedoen het en n foto wou saam he ,ons het die hele dag maar lekker gesit onder die een boom en chat ons het ook voordat ons by irene farm aangekom het by n boba tea plek gestop, beplan om n [icnic te hoyu maar toe mag ons nie kos of eers n kombers invat nie so toe smokkel ons koeldranke en n pak chips deur my rugsakkie in -->
+	<div class="polaroid-row">
+      <figure class="polaroid">
+        <img src="LockScreen_TypePic.jpeg" alt="Lockscreen Photo">
+        <figcaption>Ons eerste foto saam</figcaption>
+      </figure>
+
+      <!-- Hierdie was ons eerste date gewees wat ons by irene farm gedoen het en n foto wou saam he ,ons het die hele dag maar lekker gesit onder die een boom en chat ons het ook voordat ons by irene farm aangekom het by n boba tea plek gestop, beplan om n [icnic te hoyu maar toe mag ons nie kos of eers n kombers invat nie so toe smokkel ons koeldranke en n pak chips deur my rugsakkie in -->
+	  <figure class="polaroid">
+        <img src="Selfie.jpeg" alt="Selfie">
+        <figcaption>Ons eerste selfie</figcaption>
+      </figure>
+
+      <!-- Eerste keer vandat ons vriende is wat ons mekaar ontmoet het irl omdat dit nie te lank na my verjaarsdag was nie het Keegan ons gestick vir n drankie by starbucks toe kry ons beide die caramel frappachino wat so lekker is, ons het die res van die tyd net rondgeloop in centurion maal en by so paar klere plekke gekyk asook my bargain books en exclusive books gekyk vir manga, ons het ook n bingo chart gehad vir hierdie dag vir ekstra fun -->
+	  <figure class="polaroid">
+        <img src="1SteKuier_IRL.jpeg" alt="Eerste kuier IRL">
+        <figcaption>
+          Mekaar eerste keer IRL ontmoet<br>
+          Ons couples drink ♡
+        </figcaption>
+      </figure>
+
+      <!-- Erika se poolpary bygewoon en daarna het ons saam Keegan se ouers mayhem bygewoon waar ons gekyk het hoe hulle resies ry ons het vir baymax geskree waneer hy gery het omdat hy al kar was wat nie n resies kar was of soos een gelyk het nie. Na so 8uur se kant het hulle die fireworks show gehou daar was so baie fireworks gewees en dit was so lank en amazing gewees terwyl ek en keegan semi gecuddle het terwyl ons dit gekyk het ,daar was ook een ou wat elke nou en dan happy new years geskree het -->
+	  <figure class="polaroid video-polaroid">
+        <div class="video-frame">
+          <video autoplay loop muted playsinline>
+            <source src="Ons1steFireworkShow.mp4" type="video/mp4">
+          </video>
+        </div>
+        <figcaption>Ons eerste fireworks 🎆</figcaption>
+      </figure>
+    </div>
+
+    <!-- ------------------------ 2026 Fotos ------------------------ -->
+    <!-- <center><span style="font-size: 30px;">✧˚ ༘⋆2026✧˚ ༘ ⋆</span></center>
+    <div class="polaroid-row">
+      <figure class="polaroid">
+        <img src="" alt="">
+        <figcaption>Ons 2026 fotos sal hier kom</figcaption>
+      </figure>
+    </div> -->
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🎁 Ons Geskenke </title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+  
+    <style>
+    /* ====================================== GESKENKE FOTO + DETAILS ====================================== */
+	.gift-card img {
+	  background: #fff;
+	  padding: 10px 10px 28px 10px;   /* ekstra onder vir polaroid rand */
+	  border-radius: 4px;
+	  box-shadow: 0px 9px 23px rgba(99, 0, 49, 0.25);
+	  transform: rotate(-1.5deg);
+	  transition: transform 0.35s ease, box-shadow 0.35s ease;
+	}
+
+	.gift-date {
+	  font-family: "Dancing Script", cursive;
+	  font-size: 22px;
+	  color: var(--accent);
+	  margin-bottom: 4px;
+	}
+
+	.gift-from {
+	  color: #d23281;
+	  font-family: "Handlee", cursive;
+	  margin-bottom: 4px;
+	  text-align: left;
+	}
+
+	/* ------------------------------------ POLAROID FOTO WRAPPER ------------------------------------ */
+	.polaroid {
+	  background: #fff;
+	  width: 180px;                 /* 🔥 kleiner foto */
+	  padding: 10px 10px 34px 10px; /* ekstra onder vir teks */
+	  margin: 0 auto 14px;
+	  border-radius: 4px;
+	  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+	  transform: rotate(-1.5deg);
+	  transition: transform 0.35s ease, box-shadow 0.35s ease;
+	}
+
+	/* Variasie */
+	.gift-card:nth-child(even) .polaroid {
+	  transform: rotate(1.2deg);
+	}
+
+	.gift-card:hover .polaroid {
+	  transform: rotate(0deg) scale(1.04);
+	  box-shadow: 0px 9px 23px rgba(99, 0, 49, 0.25);
+	}
+
+	/* Die foto self */
+	.polaroid img {
+	  width: 100%;
+	  display: block;
+	  border-radius: 2px;
+	}
+
+	/* Teks OP die polaroid se onderste wit deel */
+	.polaroid-text {
+	  margin-top: 8px;
+	  font-family: "Dancing Script", cursive;
+	  font-size: 22px;
+	  color: var(--accent);
+	  text-align: center;
+	}
+	
+	/* ================= GESKENK LAYOUT ================= */
+	.card-grid {
+	  display: grid;
+	  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+	  gap: 30px;
+	}
+
+	/* Een volledige geskenk */
+	.gift-item {
+	  display: flex;
+	  align-items: flex-start;
+	  gap: 20px;
+	  background: rgba(255,255,255,0.6);
+	  padding: 16px;
+	  border-radius: 18px;
+	}
+
+	/* Links: Polaroids */
+	.polaroid-group {
+	  display: flex;
+	  gap: 12px;
+	}
+
+	/* Polaroids kleiner */
+	.polaroid {
+	  width: 150px;
+	}
+
+	/* Regs: teks */
+	.gift-info {
+	  text-align: left;
+	  flex: 1;
+	}
+
+	/* Mobile */
+	@media (max-width: 700px) {
+	  .gift-item {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	  }
+
+	  .polaroid-group {
+		justify-content: center;
+	  }
+
+	  .gift-info {
+		text-align: center;
+	  }
+	}
+
+	/* ====================================== KAARTJIES ====================================== */
+	.book {
+	  perspective: 1600px;
+	}
+	
+	.card-3d {
+	  width:100%;
+	  height:100%;
+	  position:relative;
+	  transform-style: preserve-3d;
+	  transition: transform 1.2s cubic-bezier(.4,.2,.2,1);
+	}
+	
+	.book.open .card-3d {
+	  transform: rotateY(-180deg);
+	}
+	
+	/* VOORBLAD */
+	.card-front {
+	  position:absolute;
+	  inset:0;
+	  background:white;
+	  backface-visibility: hidden;
+	}
+	
+	.card-front img {
+	  width:100%;
+	  height:100%;
+	  object-fit:contain;
+	}
+	
+	/* BINNEKAART (A4 spread) */
+	.card-inside {
+	  position:absolute;
+	  inset:0;
+	  display:flex;
+	  background:#fffdf8;
+	  transform: rotateY(180deg);
+	  backface-visibility: hidden;
+	}
+	
+	.inside-page {
+	  width: 50%;                       /* Helfte van die oop kaart (links of regs) */
+	  padding: 30px;                    /* Spasie binne die kaart */
+	  box-sizing: border-box;           /* Padding tel binne die width */
+	  font-size: 16px;                  /* Grootte van die teks */
+	  font-family: "Handlee", cursive;  /* Die handgeskrewe font */
+	  line-height: 1.5;                 /* Spasie tussen lyne */
+	  color: #000000;                   /* ⭐ TEKSKLEUR */
+	  overflow: hidden;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: flex-start;
+	  text-align: left;
+	}
+	
+	.inside-page.left {
+	  border-right:1px solid #f2c6da;
+	}
+	
+	.inside-page h3 {
+	  font-family: "Handlee", cursive;
+	  font-size:16px;
+	  color:#c70062;
+	  margin-bottom:10px;
+	}
+	
+	/* Papier gevoel */
+	.inside-page {
+	  background:
+	    linear-gradient(90deg,
+	      rgba(255,255,255,.95),
+	      rgba(255,245,250,.95)
+	    );
+	}
+
+	.book {
+	  width: 610px;        /* 🔥 breër toe */
+	  height: 600px;       /* 🔥 langer */
+	  margin: 30px auto;
+	  position: relative;
+	  perspective: 1600px;
+	}
+	
+	/* Oop = A4+ gevoel */
+	.book.open {
+	  width: 1020px;        /* 2 × 640 */
+	  height: 670px;
+	}
+	
+	.card-3d {
+	  width: 100%;
+	  height: 100%;
+	  position: relative;
+	}
+	
+	/* Responsive */
+	@media(max-width:700px){
+	  .inside-page{
+	    font-size:11px;
+	    padding:18px;
+	  }
+	}
+
+	.inside-img {
+	  width: 100%;
+	  max-height: 160px;
+	  object-fit: contain;
+	  border-radius: 10px;
+	  margin-top: 12px;
+	}
+
+	#bookN .inside-page.right .inside-img {
+	  align-self: flex-start;
+	  margin-left: 0;
+	  margin-right: auto;
+	}
+
+	/* BookK – volle blad prente */
+	#bookK .inside-page {
+	  padding: 0;
+	}
+	
+	#bookK .inside-img {
+	  width: 100%;
+	  height: 100%;
+	  max-height: none;
+	  object-fit: cover;   /* 🔥 VUL DIE HELE BLAD */
+	  border-radius: 0;
+	  margin: 0;
+	}
+	
+	/* ------------------------------------ OCCASION BLOKKE ------------------------------------ */
+	.occasion-block {
+	  background-color: #ffe6f0;  /* lig pienk vir valentyn bv. */
+	  padding: 20px;
+	  border-radius: 15px;
+	  margin-bottom: 40px;
+	  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	}
+
+	.occasion-block h3 {
+	  font-family: "Dancing Script", cursive;
+	  font-size: 28px;
+	  color: var(--accent);
+	  margin-bottom: 20px;
+	  text-align: center;
+	}
+
+	.occasion-block .card-grid {
+	  display: grid;
+	  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	  gap: 20px;
+	}
+
+	
+	/* ====================================== TERUG NA HOMEPAGE LINK STYLE ====================================== */
+    :root{
+	  --pink-1: #ffa4de;
+      --pink-2: #ffe4f5;
+      --accent: #c70062;
+      --text: #8b0044;
+	}
+
+	body{
+	  margin:0;
+	  font-family:"Playfair Display", serif;
+	  background:linear-gradient(var(--pink-1), var(--pink-2));
+	  color:var(--text);
+	  text-align:center;
+	}
+
+	.page{
+	  max-width:1100px;
+	  margin:0 auto;
+	  padding:30px 20px;
+	}
+
+	h2{
+	  font-family:"Dancing Script", cursive;
+	  font-size:48px;
+	  color:var(--accent);
+	  margin-bottom:20px;
+	}
+
+	a{
+	  color:var(--accent);
+	  text-decoration:none;
+	  font-family:"Dancing Script", cursive;
+	  font-size:22px;
+	}
+
+	a:hover{
+	  text-decoration:underline;
+	}
+	
+	/* ====================================== HARTJIE MUIS WYSER ====================================== */
+    body {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' transform='rotate(-12)'%3E%3Cpath d='M12 20 C12 20 4 14.5 4 9 C4 6.5 6 5 8 5 C9.5 5 11 6 12 7.5 C13 6 14.5 5 16 5 C18 5 20 6.5 20 9 C20 14.5 12 20 12 20 Z' fill='%23ff5c9d' stroke='%23e30b5d' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E") 12 12, auto;
+
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+	
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Terug na hoofblad -->
+    <div style="text-align:center; margin:20px 0;">
+      <a href="index.html">🏠 Terug na hoofblad</a>
+    </div>
+	
+	<!-- ====================================== ONS GESKENKE AAN MEKAAR ====================================== -->
+	<div class="section">
+	  <h2>🎁 Ons Geskenke </h2>
+
+	  <div class="card-grid">
+		<div class="card polaroid">
+		  <img src="Gojo.jpeg" alt="Gojo 3D print">
+		  <div class="polaroid-text">28 Augustus 2025</div>
+		</div>
+		
+		<div class="gift-from"><b>Van:</b> Keegan <br>
+		                       <b>Vir:</b> Noelle</div>
+		<div>
+			Gojo print –  
+			Beide van ons hou van JJK veral Sukuna maar jy kon nie n model van Sukuna kry nie so toe print jy Gojo vir my as geskenk<br>
+			<center><strong>≽ ^⎚ ˕ ⎚^ ≼</strong></center>
+		  </div>
+		
+		<div class="card gift-card">
+		  <img src="RoseMomentos.jpeg" alt="Rose Momentos">
+		  <div class="gift-date">28 Augustus 2025</div>
+		  <div class="gift-from">Van jou, vir ons 💗</div>
+		  <div>
+			First time irl momentos –  
+			Die blou rosies wat jy as momentos gekoop het vir ons ,ook die bloues gekies oor dit my fav kleur is<br>
+			<center><strong>🌹</strong></center>
+		  </div>
+		</div>
+		
+		<div class="card gift-card">
+		  <img src="AchievementTrophy.jpeg" alt="IRL Ontmoet Achievement Trophy">
+		  <div class="gift-date">28 Augustus 2025</div>
+		  <div class="gift-from">Van my, vir jou 💗</div>
+		  <div>
+			Irl achievement trophy –  
+			Achievement unlocked: Besto Friendo<br>
+			Meet each other irl<br>
+			<center><strong>𐀪𐀪</strong></center>
+		  </div>
+		</div>
+		
+		<div class="card gift-card">
+		  <img src="QuackPlush.jpeg" alt="Eendjie plush">
+		  <div class="gift-date">2 November 2025</div>
+		  <div class="gift-from">Van jou, vir my 💗</div>
+		  <div>
+			My eendjie plush –  
+			Om my te help met my eksamens en my te herhinner aan jou as ek slaap<br> 
+			<center><strong>(˶˃ ᵕ ˂˶)</strong></center>
+		  </div>
+		</div>
+		
+		<div class="card gift-card">
+		  <img src="QuackBraclets.jpeg" alt="Quack Bracelets">
+		  <div class="gift-date">23 Desember 2025</div>
+		  <div class="gift-from">Van my, vir ons 💗</div>
+		  <div>
+			Matching initials armbandjies –  
+			Sodat ons altyd ietsiekie het om ons te herhinner van mekaar, asook 'n eendjie vir jou liefie<br> 
+			<center><strong>𝒩 ♡ 𝒦</strong></center>
+		  </div>
+		</div>
+
+		<div class="card gift-card">
+		  <img src="Eendjie.jpeg" alt="Eendjie">
+		  <div class="gift-date">23 Desember 2025</div>
+		  <div class="gift-from">Van jou, vir my 💗</div>
+		  <div>
+			3D Printed Eendjie –  
+			'n Eendjie gemaak vir ons 3 month aniversary asook vir kersfees<br> 
+			<center><strong>˗ˏˋ 𓅰 ˎˊ˗</strong></center>
+		  </div>
+		</div>
+
+		<div class="card gift-card">
+		  <img src="MovieTickets.jpeg" alt="Ons eerste movie se tickets">
+		  <div class="gift-date">23 Desember 2025</div>
+		  <div class="gift-from">Van my, vir ons 💗</div>
+		  <div>
+			FNAF 2 movie tickets –  
+			Ons eerste movie saam kan kyk op n balangrike daggie<br> 
+			<center><strong>🎟📽</strong></center>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+	
+	<!-- ====================================== ONS KAARTJIES AAN MEKAAR ====================================== -->
+	<div id="heartsBg"></div>
+
+	<div class="page">
+	<h2 style="text-align:center;">💌 Ons Kaartjies</h2>
+	
+	<div class="occasion-block" style="background-color:#ffe0e0;">
+	  <h3>3 maand Anniversary en Kersfees</h3>
+	  <!-- ----------------------- Kaartjie ----------------------- -->
+		<div class="book-wrapper">
+		  <center><span style="font-size: 30px;">Noelle se kaartjie</span></center>
+		  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
+		
+		  <div class="book" id="bookN">
+		    <div class="card-3d">
+		
+		      <!-- VOORBLAD -->
+		      <div class="card-front">
+		        <img src="N_3MonthKersKaartie.jpeg">
+		      </div>
+		
+		      <!-- BINNEKAART -->
+		      <div class="card-inside">
+		
+		        <!-- LINKS -->
+		        <div class="inside-page left">
+		          <h3 style="font-size: 15px;">Geseënde Kersfees & Happy 3-Month Anniversary</h3>
+		
+		          <span style="font-size: 12.4px; font-family: 'Sitka Banner';">Ek is so so dankbaar om jou in my lewe te hê liefie en even meer dankbaar dat jy my toelaat
+				  om jou nooi (meisie) te wees, ek kan nie genoeg sê hoe baie ek jou liefhet en 
+				  hoe dankbaar ek is dat jy in my lewe is nie. Jy het my ‘n nuwe definisie van die woord
+				  liefde gewys een wat ek nie geweet het bestaan nie.<br><br>
+		
+		          Jy laat my so baie verskillende emosies en gevoelens altyd voel as ons chat of tyd saam
+		          spandeer baie van hulle het ek nie gedink ek sal ooit kan voel nie of het ek nie gedink 
+				  bestaan nie.
+				  Jy laat my so geliefd, waardeerd, betekenisvol, veilig en soveel meer voel <strong>jy is my </strong>
+				  <strong>home my safe place </strong>want met jou kan ek net myself wees en lewe saam die 
+		          belangrikste persoon in my lewe geniet.<br><br>
+		
+		          Ek kan nie genoeg sê of wys hoe baie ek jou lief het nie want niks kan daardie amount  
+		          hou of beskryf nie. Dankie dat jy altyd daar is en sal wees vir my liefie dit beteken die 
+				  wêreld vir my want niemand het dit al ooit voorheen vir my gedoen nie. Dankie dat jy 
+				  ook altyd seker maak dat ek gemaklik is met ietsie voordat jy dit doen dit is ook iets
+				  wat niemand voorheen al gedoen het nie.<br><br>
+				  
+				  Ek kan aanhou ramble oor alles nuuts wat ek met jou experience wat niemand 
+		          voorheen al gedoen het nie maar dan gaan 2 A5 blaaitjies nie genoeg wees nie want 
+				  hel dis reeds nie genoeg om alles te skryf wat ek wil sê nie. Ek wil hê jy moet altyd 
+				  weet hoe baie jy vir my beteken asook jou net so geliefd, gewaardeerd en betekenisvol 
+				  laat voel soos jy my laat voel.<br><br>
+				  
+				  <strong>Ek wil jou die gelukkigste man op die aarde maak </strong>want jy verdien dit en soveel 
+		          soveel meer liefie. Ek is absolutely mal oor jou liefie nooit gedink ek sal so mal oor 
+				  iemand wees soos ek met jou is nie liefie.<br><br>
+				  
+				  Ek kan nie wag vir wat die future vir ons inhou nie ek weet net dit gaan ‘n wonderlike 
+		          future wees omdat jy by my side sal wees en ons saam deur die lewe sal stap. My 
+				  liefde vir jou is so sterk en intens dat die liefde wat ek met my first love gehad het nie 
+				  eers ‘n fraksie van my liefde vir jou is nie.<br><br></span>
+		        </div>
+		
+		        <!-- REGS -->
+		        <div class="inside-page right">
+		          <span style="font-size: 12.5px; font-family: 'Sitka Banner';">Jy is die eerste persoon wat ek confidently oor ‘n future saam mee kan praat en 
+		          invision omdat ek weet ek ‘n future met jou en niemand anders  wil hê. Ek sien so so 
+				  baie uit vir wat vir ons voorle met DLC 2 en 3 want ek weet somer ek sal dit close tot 
+				  my hart vir ewig en altyd hou want jy, ons memories en moments beteken alles so so 
+				  so baie vir my liefie<br><br>
+		
+		          <strong>Ek kies jou - elke oomblik en in elke leeftyd liefie.</strong><br>
+		          Ek lief jou ongelooflik baie Keegan<br><br>
+		
+		          Met baie liefde,<br></span>
+		          <strong>Noelle</strong><br><br>
+		
+		          <img src="3MaandQRBl2.jpeg.jpg" class="inside-img">
+		        </div>
+		
+		      </div>
+		    </div>
+		  </div>
+		
+		</div>
+	
+	  <!-- ----------------------- Kaartjie ----------------------- -->
+	  <div class="book-wrapper">
+	  <center><span style="font-size: 30px;">Keegan se kaartjie</span></center>
+	  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
+	
+	  <div class="book" id="bookK">
+	    <div class="card-3d">
+	
+	      <!-- VOORBLAD -->
+	      <div class="card-front">
+	        <img src="KKaartjieVoor.jpeg">
+	      </div>
+	
+	      <!-- BINNEKAART -->
+	      <div class="card-inside">
+	
+	        <div class="inside-page left">
+	          <img src="KKaartjieBl1.jpeg" class="inside-img">
+	        </div>
+	
+	        <div class="inside-page right">
+	          <img src="KKaartjieBl2.jpeg" class="inside-img">
+	        </div>
+	
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</div>
+	
+	<!--Nuwe occasion blok vir nuwe occasion se kaartjies -->
+	<div class="occasion-block" style="background-color:#ffe0e0;">
+	  <h3></h3>
+	  <!-- ----------------------- Kaartjie ----------------------- -->
+		<div class="book-wrapper">
+		</div>
+	</div>
+	
+	<!-- ================================= Scripts vir kaartjies =================================== -->
+    <script>
+	function initBook(id){
+	  const book = document.getElementById(id);
+	  if(!book) return;
+	
+	  let open = false;
+	
+	  book.addEventListener("click",()=>{
+	    open = !open;
+	    book.classList.toggle("open", open);
+	  });
+	
+	  let startX = null;
+	  book.addEventListener("touchstart",e=>{
+	    startX = e.touches[0].clientX;
+	  },{passive:true});
+	
+	  book.addEventListener("touchend",e=>{
+	    if(startX === null) return;
+	    const diff = e.changedTouches[0].clientX - startX;
+	    if(Math.abs(diff) > 40){
+	      open = !open;
+	      book.classList.toggle("open", open);
+	    }
+	    startX = null;
+	  });
+	}
+	
+	initBook("bookN");
+	initBook("bookK");
+	</script>
+	
+</body>
+</html>

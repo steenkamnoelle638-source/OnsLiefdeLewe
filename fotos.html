@@ -7,6 +7,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <!--  <link rel=stylesheet href="CSS.css> -->	
   
   <style>
     :root{
@@ -161,15 +162,25 @@
       </figure>
     </div>
 
-    <!-- ------------------------ 2026 Fotos ------------------------ -->
-    <!-- <center><span style="font-size: 30px;">✧˚ ༘⋆2026✧˚ ༘ ⋆</span></center>
-    <div class="polaroid-row">
+    <div class="polaroid-row" aria-hidden="false">
       <figure class="polaroid">
-        <img src="" alt="">
-        <figcaption>Ons 2026 fotos sal hier kom</figcaption>
+        <img src="Secret Foto.jpg" alt="'n BAIE interresante foto" id="secretImage" class="blurred">
+        <figcaption>'n BAIE ✨interresante✨ foto van ons twee. Lekker gelag terwyl ons hierdie geneem het😂</figcaption>
+		  
+		<!-- knoppie om die prent te unblur -->  
+		  
+		<div class="unlock-box">
+    		<input type="password" id="passwordInput" placeholder="Voer wagwoord in">
+    		<button onclick="unlockImage()">Ontsluit</button>
+    		<p id="errorMsg"></p>
+		</div>
+		  
       </figure>
-    </div> -->
+	</div> 
+
+	 <script src="Javascript.js"></script> 
 
   </div>
 </body>
 </html>
+

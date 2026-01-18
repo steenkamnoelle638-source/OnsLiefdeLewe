@@ -138,7 +138,7 @@
 	.book {
 	  perspective: 1600px;
 	}
-	
+
 	.card-3d {
 	  width:100%;
 	  height:100%;
@@ -147,9 +147,46 @@
 	  transition: transform 1.2s cubic-bezier(.4,.2,.2,1);
 	}
 	
-	.book.open .card-3d {
-	  transform: rotateY(-180deg);
-	}
+	/* ================= BLADSY FLIP (boek gevoel) ================= */
+
+.page-flip {
+  --sw: 12px; /* “papier dikte” gevoel */
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  transform-origin: left;
+  transform-style: preserve-3d;
+}
+
+/* Wanneer boek oopgaan, animeer die bladsy */
+.book.open .page-flip {
+  animation: flipPage 1.4s cubic-bezier(.4,.2,.2,1) forwards;
+}
+
+/* Keyframes vir realistiese bladsy-vou */
+@keyframes flipPage {
+  0% {
+    transform: rotateY(0) translateX(0) skewY(0);
+  }
+
+  55% {
+    transform: rotateY(0) translateX(0) skewY(0);
+  }
+
+  70% {
+    transform: rotateY(-90deg)
+               translateX(calc(-1 * var(--sw) / 2))
+               skewY(-18deg);
+  }
+
+  100% {
+    transform: rotateY(-180deg)
+               translateX(calc(-1 * var(--sw)));
+  }
+}
 	
 	/* VOORBLAD */
 	.card-front {
@@ -250,6 +287,7 @@
 	  align-self: flex-start;
 	  margin-left: 0;
 	  margin-right: auto;
+	  align-text: left;
 	}
 
 	/* BookK – volle blad prente */
@@ -526,6 +564,8 @@
 		
 		      <!-- BINNEKAART -->
 		      <div class="card-inside">
+                <div class="page-flip">
+
 		
 		        <!-- LINKS -->
 		        <div class="inside-page left">
@@ -582,9 +622,11 @@
 		          <img src="3MaandQRBl2.jpeg.jpg" class="inside-img">
 		        </div>
 		
-		      </div>
-		    </div>
-		  </div>
+		      </div><!-- page flip -->
+		     </div><!-- card-inside -->
+				
+             </div><!-- card-3D -->
+		  </div><!-- book     bookN -->
 		
 		</div>
 	
@@ -662,6 +704,7 @@
 </body>
 
 </html>
+
 
 
 

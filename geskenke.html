@@ -147,7 +147,7 @@
 
 .book.open {
   width: 1020px;
-  height: 670px;
+  height: 700px;
 }
 
 /* ----------------- 3D WRAPPER ----------------- */
@@ -191,13 +191,17 @@
   font-size: 13px;
   overflow-y: auto;
   z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Voorblad prent */
 .card-front img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 /* ----------------- BINNEKAART (REGTER BLAD) ----------------- */
@@ -217,6 +221,7 @@
 
 .inside-page {
   width: 50%;
+  height: 100%;
   padding: 30px;
   box-sizing: border-box;
   font-family: "Handlee", cursive;
@@ -225,10 +230,19 @@
   color: black;
   font-size: 13px;
   overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .inside-page.right {
   margin-left: auto;
+}
+
+/* Lyn tussen linker en regter binneblaaie in die eerste kaartjie */
+.book#bookN .card-inside {
+  border-left: 1px solid #ccc; /* dun grys lyn */
 }
 
 /* ----------------- FLIP ANIMASIE ----------------- */
@@ -559,7 +573,7 @@
 			  Met baie liefde,<br></span>
 			  <strong>Noelle</strong><br><br>
 	
-			  <img src="3MaandQRBl2.jpeg.jpg" width="100" height="150">
+			  <img src="3MaandQRBl2.jpeg.jpg" width="150" height="200">
 	   </div>
 	</div>
 
@@ -637,6 +651,7 @@ initBook("bookK");
 
 </body>
 </html>
+
 
 
 

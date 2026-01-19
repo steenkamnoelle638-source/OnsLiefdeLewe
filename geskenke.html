@@ -258,8 +258,9 @@
 
 /* ----------------- FOTO ----------------- */
 .inside-img {
-  width: 100%;
-  height: 100%;
+  width: 1020px; /* Makes image responsive to its container width */
+  height: auto; /* Maintains aspect ratio */
+  max-width: 1020px; /* Optional: limits the image to a maximum size */
   object-fit: cover;
 }
 	
@@ -651,6 +652,7 @@ initBook("bookK");
 
 </body>
 </html>
+
 
 
 

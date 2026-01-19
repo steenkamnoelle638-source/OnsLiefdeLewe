@@ -208,10 +208,22 @@
 	
 	  transform-origin: right;
 	  transform-style: preserve-3d;
-	  backface-visibility: hidden;
 	
 	  z-index: 3;
 	}
+
+	.front-face,
+	.back-face {
+	  position: absolute;
+	  inset: 0;
+	  backface-visibility: hidden;
+	}
+	
+	/* Agterkant draai 180° */
+	.back-face {
+	  transform: rotateY(180deg);
+	}
+
 	
 	.card-front img {
 	  width:100%;
@@ -233,9 +245,7 @@
 	  position: absolute;
 	  inset: 0;
 	  display: flex;
-	  background: #fffdf8;
 	
-	  transform: none;
 	  z-index: 1;
 	}
 	
@@ -607,21 +617,15 @@
 		  <center><span style="font-size: 30px;">Noelle se kaartjie</span></center>
 		  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
 		
-		  <div class="book" id="bookN">
-	       <div class="card-3d"> 
-		
-		      <!-- VOORBLAD -->
-		      <div class="card-front">
-		        <img src="N_3MonthKersKaartie.jpeg">
-		      </div>
-		
-		      <!-- BINNEKAART -->
-		      <div class="card-inside">
-                <!-- <div class="page-flip">
-
-		
-		        <!-- LINKS -->
-		        <div class="inside-page left">
+		  <div class="card-front">
+		  <!-- VOORBLAD -->
+			  <div class="front-face">
+			    <img src="N_3MonthKersKaartie.jpeg">
+			  </div>
+			
+			  <!-- AGTERKANT VAN VOORBLAD = LINKER BINNEBLAD -->
+			  <div class="back-face inside-page left">
+			    <!-- LINKS -->
 		          <h3 style="font-size: 15px;">Geseënde Kersfees & Happy 3-Month Anniversary</h3>
 		
 		          <span style="font-size: 12.4px; font-family: 'Sitka Banner';">Ek is so so dankbaar om jou in my lewe te hê liefie en even meer dankbaar dat jy my toelaat
@@ -657,9 +661,12 @@
 				  liefde vir jou is so sterk en intens dat die liefde wat ek met my first love gehad het nie 
 				  eers ‘n fraksie van my liefde vir jou is nie.<br><br></span>
 		        </div>
-		
-		        <!-- REGS -->
-		        <div class="inside-page right">
+		  </div>
+
+			  <!-- NET REGTER BINNEBLAD BLY OOR -->
+			<div class="card-inside">
+			  <div class="inside-page right">
+			    <!-- REGS -->
 		          <span style="font-size: 12.5px; font-family: 'Sitka Banner';">Jy is die eerste persoon wat ek confidently oor ‘n future saam mee kan praat en 
 		          invision omdat ek weet ek ‘n future met jou en niemand anders  wil hê. Ek sien so so 
 				  baie uit vir wat vir ons voorle met DLC 2 en 3 want ek weet somer ek sal dit close tot 
@@ -673,14 +680,10 @@
 		          <strong>Noelle</strong><br><br>
 		
 		          <img src="3MaandQRBl2.jpeg.jpg" class="inside-img">
-		        </div>
-		
-		      <!-- </div><!-- page flip -->
-		     </div><!-- card-inside -->
-				
-             </div><!-- card-3D -->
-		  </div><!-- book     bookN -->
-		
+			  </div>
+			</div>
+
+			
 		</div>
 	
 	  <!-- ----------------------- Kaartjie ----------------------- -->
@@ -688,29 +691,23 @@
 	  <center><span style="font-size: 30px;">Keegan se kaartjie</span></center>
 	  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
 	
-	  <div class="book" id="bookK">
-	    <div class="card-3d">
+	  <div class="card-front">
+	  <!-- VOORBLAD -->
+	  <div class="front-face">
+	    <img src="KKaartjieVoor.jpeg">
+	  </div>
 	
-	      <!-- VOORBLAD -->
-	      <div class="card-front">
-	        <img src="KKaartjieVoor.jpeg">
-	      </div>
-	
-	      <!-- BINNEKAART -->
-	      <div class="card-inside">
-	
-	        <div class="inside-page left">
-	          <img src="KKaartjieBl1.jpeg" class="inside-img">
-	        </div>
-	
-	        <div class="inside-page right">
-	          <img src="KKaartjieBl2.jpeg" class="inside-img">
-	        </div>
-	
-	      </div>
-	    </div>
+	  <!-- AGTERKANT VAN VOORBLAD = LINKER BINNEBLAD -->
+	  <div class="back-face inside-page left">
+	    <img src="KKaartjieBl1.jpeg" class="inside-img">
 	  </div>
 	</div>
+	
+	<!-- NET REGTER BINNEBLAD BLY OOR -->
+	<div class="card-inside">
+	  <div class="inside-page right">
+	    <img src="KKaartjieBl2.jpeg" class="inside-img">
+	  </div>
 	</div>
 	
 	<!--Nuwe occasion blok vir nuwe occasion se kaartjies -->
@@ -756,6 +753,7 @@
 	
 </body>
 </html>
+
 
 
 

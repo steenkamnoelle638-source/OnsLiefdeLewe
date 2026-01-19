@@ -137,8 +137,8 @@
 	/* ====================================== KAARTJIES ====================================== */
 .book {
   position: relative;
-  width: 1280px;
-  height: 975px;
+  width: 1020px;
+  height: 675px;
   margin: 40px auto;
   perspective: 1600px;
   cursor: pointer;
@@ -146,8 +146,8 @@
 }
 
 .book.open {
-  width: 1280px; /* Keegan se kaartjie: 1280 x 975           My kaartjie: 1077 x 761*/
-  height: 975px;
+  width: 1020px; /* Keegan se kaartjie: 1280 x 975           My kaartjie: 1077 x 761*/
+  height: 675px;
 }
 
 /* ----------------- 3D WRAPPER ----------------- */
@@ -241,14 +241,14 @@
 }
 
 /* Lyn tussen linker en regter binneblaaie in die eerste kaartjie */
-.book#bookN .card-inside {
+.bookN .card-inside {
   border-left: 2px solid #808080; /* dun grys lyn */
 }
 
 /* Maak prente in bookK altyd die hele blad dek */
-.book#bookK .card-front img,
-.book#bookK .back-face img,
-.book#bookK .inside-page img {
+.bookK .card-front img,
+.bookK .back-face img,
+.bookK .inside-page img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* vul hele container, sny uit wat nie pas nie */
@@ -664,6 +664,7 @@ initBook("bookK");
 
 </body>
 </html>
+
 
 
 

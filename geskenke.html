@@ -135,43 +135,124 @@
 	}
 
 	/* ====================================== KAARTJIES ====================================== */
-	.book {
-	  perspective: 1600px;
-	}
+	/* ======================================
+   BOEK / KAART BASIS
+====================================== */
 
-	.card-3d {
-	  width:100%;
-	  height:100%;
-	  position:relative;
-	  transform-style: preserve-3d;
-	  transition: transform 1.2s cubic-bezier(.4,.2,.2,1);
-	}
+.book {
+  position: relative;
+  width: 610px;
+  height: 600px;
+  margin: 30px auto;
+  perspective: 1600px;
+}
 
-	/*.book.open .card-3d {
-	  transform: rotateY(-180deg);
-	}
-	
-	/* ================= BLADSY FLIP (boek gevoel) ================= */
+.book.open {
+  width: 1020px;
+  height: 670px;
+}
 
- /*.page-flip {
-  --sw: 12px; /* “papier dikte” gevoel */
-  /*width: 50%;
+.card-3d {
+  position: relative;
+  width: 100%;
   height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-
-  transform-origin: right;
   transform-style: preserve-3d;
 }
 
-/* Wanneer boek oopgaan, animeer die bladsy */
-/*.book.open .page-flip {
-  animation: flipPage 1.4s cubic-bezier(.4,.2,.2,1) forwards;
+/* ======================================
+   VOORBLAD = BLADSY WAT FLIP
+====================================== */
+
+.card-front {
+  position: absolute;
+  inset: 0;
+  width: 50%;
+  right: 0;
+
+  transform-origin: right;
+  transform-style: preserve-3d;
+
+  z-index: 3;
 }
 
-/* Keyframes vir realistiese bladsy-vou */
-/*@keyframes flipPage {
+/* Voor- en agterkant van dieselfde blad */
+.front-face,
+.back-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+/* Agterkant van voorblad = linker binneblad */
+.back-face {
+  transform: rotateY(180deg);
+}
+
+/* Prent op voorblad */
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ======================================
+   BINNEKAART (NET REGTER BLAD)
+====================================== */
+
+.card-inside {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  background: #fffdf8;
+
+  z-index: 1;
+}
+
+/* ======================================
+   BINNE BLAAIE
+====================================== */
+
+.inside-page {
+  width: 50%;
+  padding: 30px;
+  box-sizing: border-box;
+
+  font-family: "Handlee", cursive;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.95),
+      rgba(255,245,250,.95)
+    );
+}
+
+/* Linker blad – net vir AGTERKANT van cover */
+.inside-page.left {
+  border-right: 1px solid #f2c6da;
+}
+
+/* Regter blad – lê los in card-inside */
+.inside-page.right {
+  margin-left: auto;
+}
+
+/* ======================================
+   VOORBLAD FLIP ANIMASIE
+====================================== */
+
+.book.open .card-front {
+  animation: flipCover 1.4s cubic-bezier(.4,.2,.2,1) forwards;
+}
+
+@keyframes flipCover {
   0% {
     transform: rotateY(0) translateX(0) skewY(0);
   }
@@ -182,190 +263,37 @@
 
   70% {
     transform: rotateY(-90deg)
-               translateX(calc(-1 * var(--sw) / 2))
+               translateX(-6px)
                skewY(-18deg);
   }
 
   100% {
     transform: rotateY(-180deg)
-               translateX(calc(-1 * var(--sw)));
+               translateX(-12px);
   }
-} 
-	
-	/* VOORBLAD */
-	/*.card-front {
-	  position:absolute;
-	  inset:0;
-	  /*background:white;*/
-	 /* backface-visibility: hidden;
-	} */
+}
 
-	.card-front {
-	  position: absolute;
-	  inset: 0;
-	  width: 50%;
-	  right: 0;
-	
-	  transform-origin: right;
-	  transform-style: preserve-3d;
-	
-	  z-index: 3;
-	}
+/* ======================================
+   FOTO BINNEBLAAIE (BOOKK)
+====================================== */
 
-	.front-face,
-	.back-face {
-	  position: absolute;
-	  inset: 0;
-	  backface-visibility: hidden;
-	}
-	
-	/* Agterkant draai 180° */
-	.back-face {
-	  transform: rotateY(180deg);
-	}
+.inside-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
 
-	
-	.card-front img {
-	  width:100%;
-	  height:100%;
-	  object-fit:contain;
-	}
-	
-	/* BINNEKAART (A4 spread) */
-	/*.card-inside {
-	  position:absolute;
-	  inset:0;
-	  display:flex;
-	  background:#fffdf8;
-	  transform: rotateY(180deg);
-	  backface-visibility: hidden;
-	} */
+/* ======================================
+   RESPONSIVE
+====================================== */
 
-	.card-inside {
-	  position: absolute;
-	  inset: 0;
-	  display: flex;
-	
-	  z-index: 1;
-	}
-	
-	.inside-page {
-	  width: 50%;                       /* Helfte van die oop kaart (links of regs) */
-	  padding: 30px;                    /* Spasie binne die kaart */
-	  box-sizing: border-box;           /* Padding tel binne die width */
-	  font-size: 16px;                  /* Grootte van die teks */
-	  font-family: "Handlee", cursive;  /* Die handgeskrewe font */
-	  line-height: 1.5;                 /* Spasie tussen lyne */
-	  color: #000000;                   /* ⭐ TEKSKLEUR */
-	  overflow: hidden;
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: flex-start;
-	  text-align: left;
-	}
-	
-	.inside-page.left {
-	  border-right:1px solid #f2c6da;
-	}
-	
-	.inside-page h3 {
-	  font-family: "Handlee", cursive;
-	  font-size:16px;
-	  color:#c70062;
-	  margin-bottom:10px;
-	}
-	
-	/* Papier gevoel */
-	.inside-page {
-	  background:
-	    linear-gradient(90deg,
-	      rgba(255,255,255,.95),
-	      rgba(255,245,250,.95)
-	    );
-	}
-
-	.book {
-	  width: 610px;        /* 🔥 breër toe */
-	  height: 600px;       /* 🔥 langer */
-	  margin: 30px auto;
-	  position: relative;
-	  perspective: 1600px;
-	}
-	
-	/* Oop = A4+ gevoel */
-	.book.open {
-	  width: 1020px;        /* 2 × 640 */
-	  height: 670px;
-	}
-	
-	.card-3d {
-	  width: 100%;
-	  height: 100%;
-	  position: relative;
-	}
-	
-	/* Responsive */
-	@media(max-width:700px){
-	  .inside-page{
-	    font-size:11px;
-	    padding:18px;
-	  }
-	}
-
-	.inside-img {
-	  width: 100%;
-	  max-height: 160px;
-	  object-fit: contain;
-	  border-radius: 10px;
-	  margin-top: 12px;
-	}
-
-	#bookN .inside-page.right .inside-img {
-	  align-self: flex-start;
-	  margin-left: 0;
-	  margin-right: auto;
-	  align-text: left;
-	}
-
-	/* BookK – volle blad prente */
-	#bookK .inside-page {
-	  padding: 0;
-	}
-	
-	#bookK .inside-img {
-	  width: 100%;
-	  height: 100%;
-	  max-height: none;
-	  object-fit: cover;   /* 🔥 VUL DIE HELE BLAD */
-	  border-radius: 0;
-	  margin: 0;
-	}
-
-	/* VOORBLAD BLAAI ANIMASIE */
-	.book.open .card-front {
-	  animation: flipCover 1.4s cubic-bezier(.4,.2,.2,1) forwards;
-	}
-	
-	@keyframes flipCover {
-	  0% {
-	    transform: rotateY(0) translateX(0) skewY(0);
-	  }
-	
-	  55% {
-	    transform: rotateY(0) translateX(0) skewY(0);
-	  }
-	
-	  70% {
-	    transform: rotateY(-90deg)
-	               translateX(-6px)
-	               skewY(-18deg);
-	  }
-	
-	  100% {
-	    transform: rotateY(-180deg)
-	               translateX(-12px);
-	  }
-	}
+@media (max-width: 700px) {
+  .inside-page {
+    font-size: 11px;
+    padding: 18px;
+  }
+}
 	
 	/* ------------------------------------ OCCASION BLOKKE ------------------------------------ */
 	.occasion-block {
@@ -607,13 +535,11 @@
 	<!-- ====================================== ONS KAARTJIES AAN MEKAAR ====================================== -->
 	<div id="heartsBg"></div>
 
-	<div class="page">
 	<h2 style="text-align:center;">💌 Ons Kaartjies</h2>
 	
 	<div class="occasion-block" style="background-color:#ffe0e0;">
 	  <h3>3 maand Anniversary en Kersfees</h3>
 	  <!-- ----------------------- Kaartjie ----------------------- -->
-		<div class="book-wrapper">
 		  <center><span style="font-size: 30px;">Noelle se kaartjie</span></center>
 		  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
 		
@@ -682,12 +608,10 @@
 		          <img src="3MaandQRBl2.jpeg.jpg" class="inside-img">
 			  </div>
 			</div>
-
 			
 		</div>
 	
 	  <!-- ----------------------- Kaartjie ----------------------- -->
-	  <div class="book-wrapper">
 	  <center><span style="font-size: 30px;">Keegan se kaartjie</span></center>
 	  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
 	
@@ -753,6 +677,7 @@
 	
 </body>
 </html>
+
 
 
 

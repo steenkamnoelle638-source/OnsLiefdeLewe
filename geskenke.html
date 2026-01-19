@@ -137,8 +137,8 @@
 	/* ====================================== KAARTJIES ====================================== */
 .book {
   position: relative;
-  width: 1020px;
-  height: 690px;
+  width: 1280px;
+  height: 975px;
   margin: 40px auto;
   perspective: 1600px;
   cursor: pointer;
@@ -146,8 +146,8 @@
 }
 
 .book.open {
-  width: 1020px; /* Keegan se kaartjie: 1280 x 975           My kaartjie: 1077 x 761*/
-  height: 690px;
+  width: 1280px; /* Keegan se kaartjie: 1280 x 975           My kaartjie: 1077 x 761*/
+  height: 975px;
 }
 
 /* ----------------- 3D WRAPPER ----------------- */
@@ -242,7 +242,19 @@
 
 /* Lyn tussen linker en regter binneblaaie in die eerste kaartjie */
 .book#bookN .card-inside {
-  border-left: 1px solid #ccc; /* dun grys lyn */
+  border-left: 2px solid #808080; /* dun grys lyn */
+}
+
+/* Maak prente in bookK altyd die hele blad dek */
+.book#bookK .card-front img,
+.book#bookK .back-face img,
+.book#bookK .inside-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* vul hele container, sny uit wat nie pas nie */
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 /* ----------------- FLIP ANIMASIE ----------------- */
@@ -258,7 +270,7 @@
 
 /* ----------------- FOTO ----------------- */
 .inside-img {
-  width: 1020px; /* Makes image responsive to its container width */
+  width: 100%; /* Makes image responsive to its container width */
   height: auto; /* Maintains aspect ratio */
   max-width: 1020px; /* Optional: limits the image to a maximum size */
   object-fit: cover;
@@ -652,6 +664,7 @@ initBook("bookK");
 
 </body>
 </html>
+
 
 
 

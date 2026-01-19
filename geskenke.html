@@ -152,9 +152,9 @@
 	
 	/* ================= BLADSY FLIP (boek gevoel) ================= */
 
- .page-flip {
+ /*.page-flip {
   --sw: 12px; /* “papier dikte” gevoel */
-  width: 50%;
+  /*width: 50%;
   height: 100%;
   position: absolute;
   right: 0;
@@ -165,12 +165,12 @@
 }
 
 /* Wanneer boek oopgaan, animeer die bladsy */
-.book.open .page-flip {
+/*.book.open .page-flip {
   animation: flipPage 1.4s cubic-bezier(.4,.2,.2,1) forwards;
 }
 
 /* Keyframes vir realistiese bladsy-vou */
-@keyframes flipPage {
+/*@keyframes flipPage {
   0% {
     transform: rotateY(0) translateX(0) skewY(0);
   }
@@ -189,14 +189,27 @@
     transform: rotateY(-180deg)
                translateX(calc(-1 * var(--sw)));
   }
-}
+} 
 	
 	/* VOORBLAD */
-	.card-front {
+	/*.card-front {
 	  position:absolute;
 	  inset:0;
 	  /*background:white;*/
+	 /* backface-visibility: hidden;
+	} */
+
+	.card-front {
+	  position: absolute;
+	  inset: 0;
+	  width: 50%;
+	  right: 0;
+	
+	  transform-origin: right;
+	  transform-style: preserve-3d;
 	  backface-visibility: hidden;
+	
+	  z-index: 3;
 	}
 	
 	.card-front img {
@@ -206,13 +219,23 @@
 	}
 	
 	/* BINNEKAART (A4 spread) */
-	.card-inside {
+	/*.card-inside {
 	  position:absolute;
 	  inset:0;
 	  display:flex;
 	  background:#fffdf8;
 	  transform: rotateY(180deg);
 	  backface-visibility: hidden;
+	} */
+
+	.card-inside {
+	  position: absolute;
+	  inset: 0;
+	  display: flex;
+	  background: #fffdf8;
+	
+	  transform: none;
+	  z-index: 1;
 	}
 	
 	.inside-page {
@@ -306,6 +329,32 @@
 	  border-radius: 0;
 	  margin: 0;
 	}
+
+	/* VOORBLAD BLAAI ANIMASIE */
+	.book.open .card-front {
+	  animation: flipCover 1.4s cubic-bezier(.4,.2,.2,1) forwards;
+	}
+	
+	@keyframes flipCover {
+	  0% {
+	    transform: rotateY(0) translateX(0) skewY(0);
+	  }
+	
+	  55% {
+	    transform: rotateY(0) translateX(0) skewY(0);
+	  }
+	
+	  70% {
+	    transform: rotateY(-90deg)
+	               translateX(-6px)
+	               skewY(-18deg);
+	  }
+	
+	  100% {
+	    transform: rotateY(-180deg)
+	               translateX(-12px);
+	  }
+	}
 	
 	/* ------------------------------------ OCCASION BLOKKE ------------------------------------ */
 	.occasion-block {
@@ -386,8 +435,8 @@
   </style>
 </head>
 
-<body>
-  <div class="page">
+<body>  
+	<div class="page">
 
     <!-- Terug na hoofblad -->
     <div style="text-align:center; margin:20px 0;">
@@ -567,7 +616,7 @@
 		
 		      <!-- BINNEKAART -->
 		      <div class="card-inside">
-                <div class="page-flip">
+                <!-- <div class="page-flip">
 
 		
 		        <!-- LINKS -->
@@ -625,7 +674,7 @@
 		          <img src="3MaandQRBl2.jpeg.jpg" class="inside-img">
 		        </div>
 		
-		      </div><!-- page flip -->
+		      <!-- </div><!-- page flip -->
 		     </div><!-- card-inside -->
 				
              </div><!-- card-3D -->
@@ -705,8 +754,8 @@
 	</script>
 	
 </body>
-
 </html>
+
 
 
 

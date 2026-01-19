@@ -135,16 +135,14 @@
 	}
 
 	/* ====================================== KAARTJIES ====================================== */
-	/* ======================================
-   BOEK / KAART BASIS
-====================================== */
-
 .book {
   position: relative;
   width: 610px;
   height: 600px;
-  margin: 30px auto;
+  margin: 40px auto;
   perspective: 1600px;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .book.open {
@@ -152,32 +150,32 @@
   height: 670px;
 }
 
+/* ================= 3D WRAPPER ================= */
+
 .card-3d {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  /* transition: transform 1.2s cubic-bezier(.4,.2,.2,1); */
 }
 
-/* ======================================
-   VOORBLAD = BLADSY WAT FLIP
-====================================== */
+/* ================= VOORBLAD ================= */
 
 .card-front {
   position: absolute;
-  inset: 0;
-  width: 50%;
+  top: 0;
   right: 0;
-  /* background:white; */
+  width: 50%;
+  height: 100%;
 
   transform-origin: right;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
 
   z-index: 3;
 }
 
-/* Voor- en agterkant van dieselfde blad */
+/* Voor & agter van dieselfde blad */
 .front-face,
 .back-face {
   position: absolute;
@@ -185,86 +183,59 @@
   backface-visibility: hidden;
 }
 
-/* Agterkant van voorblad = linker binneblad */
+/* Agterkant = linker binneblad */
 .back-face {
-  font-size:13px;
-  color: #000000;
-  font-family: "Handlee", cursive;
   transform: rotateY(180deg);
-	
-  background-color: #FFFFFF;
+  background: white;
+  padding: 30px;
+  box-sizing: border-box;
+  font-family: "Handlee", cursive;
+  font-size: 13px;
+  overflow-y: auto;
 }
 
-/* Prent op voorblad */
+/* Voorblad prent */
 .card-front img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* ======================================
-   BINNEKAART (NET REGTER BLAD)
-====================================== */
+/* ================= BINNEKAART ================= */
 
 .card-inside {
   position: absolute;
   inset: 0;
   display: flex;
-  background-color: #FFFFFF;
-
+  background: white;
   z-index: 1;
+
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* ======================================
-   BINNE BLAAIE
-====================================== */
+/* Word eers sigbaar wanneer oop */
+.book.open .card-inside {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ================= BINNE BLAAIE ================= */
 
 .inside-page {
   width: 50%;
   padding: 30px;
   box-sizing: border-box;
-
   font-family: "Handlee", cursive;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #000000;
-
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.95),
-      rgba(255,245,250,.95)
-    ); 
-
-	background-color: #FFFFFF;
+  font-size: 13px;
+  overflow-y: auto;
 }
 
-/* Linker blad – net vir AGTERKANT van cover */
-.inside-page.left {
-  font-size:13px;
-  color: #000000;
-  font-family: "Handlee", cursive;
-  border-right: 1px solid #f2c6da;
-}
-
-/* Regter blad – lê los in card-inside */
 .inside-page.right {
-  font-size:13px;
-  color: #000000;
-  font-family: "Handlee", cursive;
   margin-left: auto;
-
-  background-color: #FFFFFF;
 }
 
-/* ======================================
-   VOORBLAD FLIP ANIMASIE
-====================================== */
+/* ================= FLIP ANIMASIE ================= */
 
 .book.open .card-front {
   animation: flipCover 1.4s cubic-bezier(.4,.2,.2,1) forwards;
@@ -272,45 +243,24 @@
 
 @keyframes flipCover {
   0% {
-    transform: rotateY(0) translateX(0) skewY(0);
+    transform: rotateY(0);
   }
 
-  55% {
-    transform: rotateY(0) translateX(0) skewY(0);
-  }
-
-  70% {
-    transform: rotateY(-90deg)
-               translateX(-6px)
-               skewY(-18deg);
+  60% {
+    transform: rotateY(-90deg) skewY(-12deg);
   }
 
   100% {
-    transform: rotateY(-180deg)
-               translateX(-12px);
+    transform: rotateY(-180deg);
   }
 }
 
-/* ======================================
-   FOTO BINNEBLAAIE (BOOKK)
-====================================== */
+/* ================= FOTO ================= */
 
 .inside-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;
-}
-
-/* ======================================
-   RESPONSIVE
-====================================== */
-
-@media (max-width: 700px) {
-  .inside-page {
-    font-size: 11px;
-    padding: 18px;
-  }
 }
 	
 	/* ------------------------------------ OCCASION BLOKKE ------------------------------------ */
@@ -562,76 +512,73 @@
 		  <center><span style="font-size: 30px;">Noelle se kaartjie</span></center>
 		  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
 		
-		<div class="book" id="bookN">
-		<div class="card-3d">
-		  <div class="card-front">
-		  <!-- VOORBLAD -->
-			  <div class="front-face">
-			    <img src="N_3MonthKersKaartie.jpeg">
-			  </div>
-			
-			  <!-- AGTERKANT VAN VOORBLAD = LINKER BINNEBLAD -->
-			  <div class="back-face inside-page left">
-			    <!-- LINKS -->
-		          <h3 style="font-size: 15px;">Geseënde Kersfees & Happy 3-Month Anniversary</h3>
-		
-		          <span style="font-size: 12.4px; font-family: 'Sitka Banner';">Ek is so so dankbaar om jou in my lewe te hê liefie en even meer dankbaar dat jy my toelaat
-				  om jou nooi (meisie) te wees, ek kan nie genoeg sê hoe baie ek jou liefhet en 
-				  hoe dankbaar ek is dat jy in my lewe is nie. Jy het my ‘n nuwe definisie van die woord
-				  liefde gewys een wat ek nie geweet het bestaan nie.<br><br>
-		
-		          Jy laat my so baie verskillende emosies en gevoelens altyd voel as ons chat of tyd saam
-		          spandeer baie van hulle het ek nie gedink ek sal ooit kan voel nie of het ek nie gedink 
-				  bestaan nie.
-				  Jy laat my so geliefd, waardeerd, betekenisvol, veilig en soveel meer voel <strong>jy is my </strong>
-				  <strong>home my safe place </strong>want met jou kan ek net myself wees en lewe saam die 
-		          belangrikste persoon in my lewe geniet.<br><br>
-		
-		          Ek kan nie genoeg sê of wys hoe baie ek jou lief het nie want niks kan daardie amount  
-		          hou of beskryf nie. Dankie dat jy altyd daar is en sal wees vir my liefie dit beteken die 
-				  wêreld vir my want niemand het dit al ooit voorheen vir my gedoen nie. Dankie dat jy 
-				  ook altyd seker maak dat ek gemaklik is met ietsie voordat jy dit doen dit is ook iets
-				  wat niemand voorheen al gedoen het nie.<br><br>
-				  
-				  Ek kan aanhou ramble oor alles nuuts wat ek met jou experience wat niemand 
-		          voorheen al gedoen het nie maar dan gaan 2 A5 blaaitjies nie genoeg wees nie want 
-				  hel dis reeds nie genoeg om alles te skryf wat ek wil sê nie. Ek wil hê jy moet altyd 
-				  weet hoe baie jy vir my beteken asook jou net so geliefd, gewaardeerd en betekenisvol 
-				  laat voel soos jy my laat voel.<br><br>
-				  
-				  <strong>Ek wil jou die gelukkigste man op die aarde maak </strong>want jy verdien dit en soveel 
-		          soveel meer liefie. Ek is absolutely mal oor jou liefie nooit gedink ek sal so mal oor 
-				  iemand wees soos ek met jou is nie liefie.<br><br>
-				  
-				  Ek kan nie wag vir wat die future vir ons inhou nie ek weet net dit gaan ‘n wonderlike 
-		          future wees omdat jy by my side sal wees en ons saam deur die lewe sal stap. My 
-				  liefde vir jou is so sterk en intens dat die liefde wat ek met my first love gehad het nie 
-				  eers ‘n fraksie van my liefde vir jou is nie.<br><br></span>
-		        </div>
-		  </div>
+<div class="book" id="bookN">
+  <div class="card-3d">
+
+    <div class="card-front">
+      <div class="front-face">
+        <img src="N_3MonthKersKaartie.jpeg">
+      </div>
+
+      <div class="back-face">
+		  <h3 style="font-size: 15px;">Geseënde Kersfees & Happy 3-Month Anniversary</h3>
+
+		  <span style="font-size: 12.4px; font-family: 'Sitka Banner';">Ek is so so dankbaar om jou in my lewe te hê liefie en even meer dankbaar dat jy my toelaat
+		  om jou nooi (meisie) te wees, ek kan nie genoeg sê hoe baie ek jou liefhet en 
+		  hoe dankbaar ek is dat jy in my lewe is nie. Jy het my ‘n nuwe definisie van die woord
+		  liefde gewys een wat ek nie geweet het bestaan nie.<br><br>
+
+		  Jy laat my so baie verskillende emosies en gevoelens altyd voel as ons chat of tyd saam
+		  spandeer baie van hulle het ek nie gedink ek sal ooit kan voel nie of het ek nie gedink 
+		  bestaan nie.
+		  Jy laat my so geliefd, waardeerd, betekenisvol, veilig en soveel meer voel <strong>jy is my </strong>
+		  <strong>home my safe place </strong>want met jou kan ek net myself wees en lewe saam die 
+		  belangrikste persoon in my lewe geniet.<br><br>
+
+		  Ek kan nie genoeg sê of wys hoe baie ek jou lief het nie want niks kan daardie amount  
+		  hou of beskryf nie. Dankie dat jy altyd daar is en sal wees vir my liefie dit beteken die 
+		  wêreld vir my want niemand het dit al ooit voorheen vir my gedoen nie. Dankie dat jy 
+		  ook altyd seker maak dat ek gemaklik is met ietsie voordat jy dit doen dit is ook iets
+		  wat niemand voorheen al gedoen het nie.<br><br>
+		  
+		  Ek kan aanhou ramble oor alles nuuts wat ek met jou experience wat niemand 
+		  voorheen al gedoen het nie maar dan gaan 2 A5 blaaitjies nie genoeg wees nie want 
+		  hel dis reeds nie genoeg om alles te skryf wat ek wil sê nie. Ek wil hê jy moet altyd 
+		  weet hoe baie jy vir my beteken asook jou net so geliefd, gewaardeerd en betekenisvol 
+		  laat voel soos jy my laat voel.<br><br>
+		  
+		  <strong>Ek wil jou die gelukkigste man op die aarde maak </strong>want jy verdien dit en soveel 
+		  soveel meer liefie. Ek is absolutely mal oor jou liefie nooit gedink ek sal so mal oor 
+		  iemand wees soos ek met jou is nie liefie.<br><br>
+		  
+		  Ek kan nie wag vir wat die future vir ons inhou nie ek weet net dit gaan ‘n wonderlike 
+		  future wees omdat jy by my side sal wees en ons saam deur die lewe sal stap. My 
+		  liefde vir jou is so sterk en intens dat die liefde wat ek met my first love gehad het nie 
+		  eers ‘n fraksie van my liefde vir jou is nie.<br><br></span>
+		</div>
+	</div>
 
 			  <!-- NET REGTER BINNEBLAD BLY OOR -->
-			<div class="card-inside">
-			  <div class="inside-page right">
-			    <!-- REGS -->
-		          <span style="font-size: 12.5px; font-family: 'Sitka Banner';">Jy is die eerste persoon wat ek confidently oor ‘n future saam mee kan praat en 
-		          invision omdat ek weet ek ‘n future met jou en niemand anders  wil hê. Ek sien so so 
-				  baie uit vir wat vir ons voorle met DLC 2 en 3 want ek weet somer ek sal dit close tot 
-				  my hart vir ewig en altyd hou want jy, ons memories en moments beteken alles so so 
-				  so baie vir my liefie<br><br>
-		
-		          <strong>Ek kies jou - elke oomblik en in elke leeftyd liefie.</strong><br>
-		          Ek lief jou ongelooflik baie Keegan<br><br>
-		
-		          Met baie liefde,<br></span>
-		          <strong>Noelle</strong><br><br>
-		
-		          <img src="3MaandQRBl2.jpeg.jpg">
-			  </div>
-			</div>
+	<div class="card-inside">
+      <div class="inside-page right">
+			<span style="font-size: 12.5px; font-family: 'Sitka Banner';">Jy is die eerste persoon wat ek confidently oor ‘n future saam mee kan praat en 
+			  invision omdat ek weet ek ‘n future met jou en niemand anders  wil hê. Ek sien so so 
+			  baie uit vir wat vir ons voorle met DLC 2 en 3 want ek weet somer ek sal dit close tot 
+			  my hart vir ewig en altyd hou want jy, ons memories en moments beteken alles so so 
+			  so baie vir my liefie<br><br>
+	
+			  <strong>Ek kies jou - elke oomblik en in elke leeftyd liefie.</strong><br>
+			  Ek lief jou ongelooflik baie Keegan<br><br>
+	
+			  Met baie liefde,<br></span>
+			  <strong>Noelle</strong><br><br>
+	
+			  <img src="3MaandQRBl2.jpeg.jpg">
+	   </div>
+	</div>
 
-		</div>
-		</div>
+	</div>
+</div>
 			
 		</div>
 	
@@ -639,26 +586,27 @@
 	  <center><span style="font-size: 30px;">Keegan se kaartjie</span></center>
 	  'n Kaartjie wat Noelle vir Keegan gemaak het vir hul 3 maand Anniversary en vir Kersfees
 	
-	  <div class="book" id="bookK">
-		  <div class="card-3d">
-		
-		    <div class="card-front">
-		      <div class="front-face">
-		        <img src="KKaartjieVoor.jpeg">
-		      </div>
-		      <div class="back-face inside-page left">
-		        <img src="KKaartjieBl1.jpeg" class="inside-img">
-		      </div>
-		    </div>
-		
-		    <div class="card-inside">
-		      <div class="inside-page right">
-		        <img src="KKaartjieBl2.jpeg" class="inside-img">
-		      </div>
-		    </div>
-		
-		  </div>
-		</div>
+<div class="book" id="bookK">
+  <div class="card-3d">
+
+    <div class="card-front">
+      <div class="front-face">
+        <img src="KKaartjieVoor.jpeg">
+      </div>
+
+      <div class="back-face">
+        <img src="KKaartjieBl1.jpeg">
+      </div>
+    </div>
+
+    <div class="card-inside">
+      <div class="inside-page right">
+        <img src="KKaartjieBl2.jpeg">
+      </div>
+    </div>
+
+  </div>
+</div>
 
 	
 	<!--Nuwe occasion blok vir nuwe occasion se kaartjies -->
@@ -704,29 +652,3 @@
 	
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

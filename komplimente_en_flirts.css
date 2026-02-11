@@ -1,42 +1,91 @@
-    :root{
-      --pink-1: #ffa4de;
-      --pink-2: #ffe4f5;
-      --accent: #c70062;
-      --text: #8b0044;
-      --soft-shadow: 10px 10px 23px rgba(120, 0, 60, 0.5);
-    }
+:root{
+    --pink-1: #ffa4de;
+    --pink-2: #ffe4f5;
+    --accent: #c70062;
+    --text: #8b0044;
+    --soft-shadow: 10px 10px 23px rgba(120, 0, 60, 0.5);
+  }
 
-    body {
-      margin:0;
-      font-family: "Playfair Display", serif;
-      background: linear-gradient(#ffa4de, #ffe4f5);
-      color: var(--text);
-    }
+  body {
+    margin:0;
+    font-family: "Playfair Display", serif;
+    background: linear-gradient(#ffa4de, #ffe4f5);
+    color: var(--text);
+  }
 
-    .page { max-width: 1180px; margin: 0 auto; padding: 18px; box-sizing: border-box; }
+  .page { max-width: 1180px; margin: 0 auto; padding: 18px; box-sizing: border-box; }
 
-    h2 {
-      font-family: "Dancing Script", cursive;
-      font-size: 38px;
-      color: var(--accent);
-      margin-bottom: 20px;
-      text-align:center;
-    }
+  h2 {
+    font-family: "Dancing Script", cursive;
+    font-size: 38px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-align:center;
+  }
 
-	/* ====================================== TERUG NA HOMEPAGE LINK STYLE ====================================== */
-	
-    a {
-      color: var(--accent);
-      text-decoration:none;
-      font-family:"Dancing Script", cursive;
-      font-size:22px;
-    }
-    a:hover { text-decoration:underline; }
+.chat-container {
+    width: 600px;
+    height: 600px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-    @media(max-width:940px){
-      .polaroid { width: 42%; }
-    }
-    @media(max-width:520px){
-      .polaroid { width: 85%; transform: rotate(0deg); }
-      .polaroid:nth-child(1), .polaroid:nth-child(2), .polaroid:nth-child(3) { transform: rotate(0deg); }
-    }
+.chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.me {
+    background: #ffa3a3;
+    color: white;
+    margin-left: auto;
+}
+
+.other {
+    background: #e5e5ea;
+}
+
+.sender {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.input-area {
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+    border-top: 1px solid #ddd;
+}
+
+input {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    flex: 1;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    background: #ff9c9c;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ad6d6d;
+}

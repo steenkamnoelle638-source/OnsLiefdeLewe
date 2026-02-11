@@ -1,0 +1,42 @@
+    :root{
+      --pink-1: #ffa4de;
+      --pink-2: #ffe4f5;
+      --accent: #c70062;
+      --text: #8b0044;
+      --soft-shadow: 10px 10px 23px rgba(120, 0, 60, 0.5);
+    }
+
+    body {
+      margin:0;
+      font-family: "Playfair Display", serif;
+      background: linear-gradient(#ffa4de, #ffe4f5);
+      color: var(--text);
+    }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 18px; box-sizing: border-box; }
+
+    h2 {
+      font-family: "Dancing Script", cursive;
+      font-size: 38px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      text-align:center;
+    }
+
+	/* ====================================== TERUG NA HOMEPAGE LINK STYLE ====================================== */
+	
+    a {
+      color: var(--accent);
+      text-decoration:none;
+      font-family:"Dancing Script", cursive;
+      font-size:22px;
+    }
+    a:hover { text-decoration:underline; }
+
+    @media(max-width:940px){
+      .polaroid { width: 42%; }
+    }
+    @media(max-width:520px){
+      .polaroid { width: 85%; transform: rotate(0deg); }
+      .polaroid:nth-child(1), .polaroid:nth-child(2), .polaroid:nth-child(3) { transform: rotate(0deg); }
+    }
